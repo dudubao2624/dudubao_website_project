@@ -8,6 +8,7 @@ const mobileMenu = document.querySelector("#mobile-menu");
 const contactLayout = document.querySelector("[data-contact-layout]");
 const contactSuccess = document.querySelector("[data-contact-success]");
 const returnHomeLink = document.querySelector("[data-return-home]");
+const heroCarousel = document.querySelector("[data-hero-carousel]");
 
 if (header && mobileMenuToggle && mobileMenu) {
   const closeMobileMenu = () => {
@@ -66,6 +67,83 @@ if (returnHomeLink) {
   returnHomeLink.addEventListener("click", () => {
     window.setTimeout(() => window.scrollTo({ top: 0, behavior: "smooth" }), 0);
   });
+}
+
+if (heroCarousel) {
+  const slides = Array.from(heroCarousel.querySelectorAll("[data-carousel-slide]"));
+  const dots = Array.from(heroCarousel.querySelectorAll("[data-carousel-dot]"));
+  const prevButton = heroCarousel.querySelector("[data-carousel-prev]");
+  const nextButton = heroCarousel.querySelector("[data-carousel-next]");
+  const autoRotateMs = 6000;
+  let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+  let rotationTimer;
+
+  if (activeIndex < 0) {
+    activeIndex = 0;
+  }
+
+  const showSlide = (nextIndex) => {
+    const slideCount = slides.length;
+
+    if (!slideCount) {
+      return;
+    }
+
+    activeIndex = (nextIndex + slideCount) % slideCount;
+
+    slides.forEach((slide, index) => {
+      const isActive = index === activeIndex;
+      slide.classList.toggle("is-active", isActive);
+      slide.hidden = !isActive;
+      slide.setAttribute("aria-hidden", String(!isActive));
+    });
+
+    dots.forEach((dot, index) => {
+      const isActive = index === activeIndex;
+      dot.classList.toggle("is-active", isActive);
+      dot.setAttribute("aria-selected", String(isActive));
+    });
+  };
+
+  const stopRotation = () => {
+    if (rotationTimer) {
+      window.clearInterval(rotationTimer);
+    }
+  };
+
+  const startRotation = () => {
+    stopRotation();
+    rotationTimer = window.setInterval(() => showSlide(activeIndex + 1), autoRotateMs);
+  };
+
+  showSlide(activeIndex);
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      showSlide(index);
+      startRotation();
+    });
+  });
+
+  if (prevButton) {
+    prevButton.addEventListener("click", () => {
+      showSlide(activeIndex - 1);
+      startRotation();
+    });
+  }
+
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      showSlide(activeIndex + 1);
+      startRotation();
+    });
+  }
+
+  heroCarousel.addEventListener("mouseenter", stopRotation);
+  heroCarousel.addEventListener("mouseleave", startRotation);
+  heroCarousel.addEventListener("focusin", stopRotation);
+  heroCarousel.addEventListener("focusout", startRotation);
+  startRotation();
 }
 
 if (form && statusMessage) {
