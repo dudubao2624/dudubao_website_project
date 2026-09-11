@@ -10,6 +10,237 @@ const contactSuccess = document.querySelector("[data-contact-success]");
 const returnHomeLink = document.querySelector("[data-return-home]");
 const heroCarousel = document.querySelector("[data-hero-carousel]");
 
+const analyticsConsentStorageKey = "dudubao_analytics_consent_v1";
+const googleAnalyticsId = "G-R1SKJ6HSXM";
+const clarityProjectId = "ygnxvami74";
+const analyticsEventNames = new Set(["form_submit_success", "whatsapp_click", "email_click"]);
+const analyticsState = {
+  googleInitialized: false,
+  clarityInitialized: false,
+};
+
+const readAnalyticsConsent = () => {
+  try {
+    const value = window.localStorage.getItem(analyticsConsentStorageKey);
+    return value === "granted" || value === "denied" ? value : null;
+  } catch (error) {
+    console.warn("DUDUBAO analytics preference could not be read", error);
+    return null;
+  }
+};
+
+const writeAnalyticsConsent = (value) => {
+  try {
+    window.localStorage.setItem(analyticsConsentStorageKey, value);
+  } catch (error) {
+    console.warn("DUDUBAO analytics preference could not be saved", error);
+  }
+};
+
+const initializeGoogleAnalytics = () => {
+  if (analyticsState.googleInitialized || window.dudubaoGoogleAnalyticsInitialized) {
+    return;
+  }
+
+  analyticsState.googleInitialized = true;
+  window.dudubaoGoogleAnalyticsInitialized = true;
+  window[`ga-disable-${googleAnalyticsId}`] = false;
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function gtag() {
+    window.dataLayer.push(arguments);
+  };
+
+  window.gtag("consent", "default", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
+    analytics_storage: "granted",
+  });
+  window.gtag("js", new Date());
+  window.gtag("config", googleAnalyticsId);
+
+  if (!document.getElementById("dudubao-ga4-script")) {
+    const googleScript = document.createElement("script");
+    googleScript.id = "dudubao-ga4-script";
+    googleScript.async = true;
+    googleScript.src = `https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`;
+    document.head.append(googleScript);
+  }
+};
+
+const initializeClarity = () => {
+  if (analyticsState.clarityInitialized || window.dudubaoClarityInitialized) {
+    return;
+  }
+
+  analyticsState.clarityInitialized = true;
+  window.dudubaoClarityInitialized = true;
+  window.clarity = window.clarity || function clarity() {
+    (window.clarity.q = window.clarity.q || []).push(arguments);
+  };
+  window.clarity("consentv2", {
+    ad_Storage: "denied",
+    analytics_Storage: "granted",
+  });
+
+  if (!document.getElementById("dudubao-clarity-script")) {
+    const clarityScript = document.createElement("script");
+    clarityScript.id = "dudubao-clarity-script";
+    clarityScript.async = true;
+    clarityScript.src = `https://www.clarity.ms/tag/${clarityProjectId}`;
+    document.head.append(clarityScript);
+  }
+};
+
+const initializeAnalytics = () => {
+  if (readAnalyticsConsent() !== "granted") {
+    return;
+  }
+
+  initializeGoogleAnalytics();
+  initializeClarity();
+};
+
+const clearGoogleAnalyticsCookies = () => {
+  const cookieNames = document.cookie
+    .split(";")
+    .map((cookie) => cookie.split("=")[0].trim())
+    .filter((name) => /^_ga(?:_|$)|^_gid$|^_gat(?:_|$)/.test(name));
+  const hostname = window.location.hostname;
+  const hostnameParts = hostname.split(".");
+  const parentDomain =
+    hostnameParts.length > 1 ? `.${hostnameParts.slice(-2).join(".")}` : "";
+  const domains = [...new Set(["", hostname, hostname ? `.${hostname}` : "", parentDomain])];
+
+  cookieNames.forEach((name) => {
+    domains.forEach((domain) => {
+      const domainAttribute = domain ? `; Domain=${domain}` : "";
+      document.cookie = `${name}=; Max-Age=0; Path=/${domainAttribute}; SameSite=Lax`;
+    });
+  });
+};
+
+const revokeAnalytics = () => {
+  const trackersWereInitialized =
+    analyticsState.googleInitialized || analyticsState.clarityInitialized;
+
+  if (analyticsState.googleInitialized && typeof window.gtag === "function") {
+    window.gtag("consent", "update", {
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied",
+      analytics_storage: "denied",
+    });
+    window[`ga-disable-${googleAnalyticsId}`] = true;
+    clearGoogleAnalyticsCookies();
+  }
+
+  if (analyticsState.clarityInitialized && typeof window.clarity === "function") {
+    window.clarity("consentv2", {
+      ad_Storage: "denied",
+      analytics_Storage: "denied",
+    });
+    window.clarity("consent", false);
+  }
+
+  if (trackersWereInitialized) {
+    window.setTimeout(() => window.location.reload(), 0);
+  }
+};
+
+const trackAnalyticsEvent = (eventName) => {
+  if (readAnalyticsConsent() !== "granted" || !analyticsEventNames.has(eventName)) {
+    return;
+  }
+
+  if (analyticsState.googleInitialized && typeof window.gtag === "function") {
+    window.gtag("event", eventName, {
+      send_to: googleAnalyticsId,
+      transport_type: "beacon",
+    });
+  }
+
+  if (analyticsState.clarityInitialized && typeof window.clarity === "function") {
+    window.clarity("event", eventName);
+  }
+};
+
+const setupAnalyticsConsent = () => {
+  const consentBanner = document.createElement("section");
+  consentBanner.className = "analytics-consent";
+  consentBanner.hidden = true;
+  consentBanner.setAttribute("role", "region");
+  consentBanner.setAttribute("aria-labelledby", "analytics-consent-title");
+  consentBanner.innerHTML = `
+    <div class="analytics-consent-copy">
+      <h2 id="analytics-consent-title">Analytics Cookies</h2>
+      <p>We use optional analytics technologies to understand how visitors use our website and improve the experience. You can accept or reject analytics without affecting website functionality.</p>
+    </div>
+    <div class="analytics-consent-actions">
+      <button type="button" class="analytics-consent-choice" data-consent-accept>Accept Analytics</button>
+      <button type="button" class="analytics-consent-choice" data-consent-reject>Reject</button>
+      <a href="privacy.html">Privacy Policy</a>
+    </div>
+  `;
+  document.body.append(consentBanner);
+
+  const acceptButton = consentBanner.querySelector("[data-consent-accept]");
+  const rejectButton = consentBanner.querySelector("[data-consent-reject]");
+  const consentTitle = consentBanner.querySelector("#analytics-consent-title");
+
+  const openConsentBanner = (moveFocus = false) => {
+    consentBanner.hidden = false;
+    if (moveFocus && consentTitle) {
+      consentTitle.setAttribute("tabindex", "-1");
+      consentTitle.focus({ preventScroll: true });
+    }
+  };
+
+  const closeConsentBanner = () => {
+    consentBanner.hidden = true;
+  };
+
+  acceptButton.addEventListener("click", () => {
+    writeAnalyticsConsent("granted");
+    closeConsentBanner();
+    initializeAnalytics();
+  });
+
+  rejectButton.addEventListener("click", () => {
+    writeAnalyticsConsent("denied");
+    closeConsentBanner();
+    revokeAnalytics();
+  });
+
+  document.querySelectorAll("[data-cookie-settings]").forEach((button) => {
+    button.addEventListener("click", () => openConsentBanner(true));
+  });
+
+  const storedConsent = readAnalyticsConsent();
+  if (storedConsent === "granted") {
+    initializeAnalytics();
+  } else if (storedConsent === null) {
+    openConsentBanner();
+  }
+};
+
+setupAnalyticsConsent();
+
+document.addEventListener("click", (event) => {
+  const contactLink = event.target.closest("a[href]");
+
+  if (!contactLink) {
+    return;
+  }
+
+  const href = contactLink.getAttribute("href") || "";
+  if (href.startsWith("https://wa.me/")) {
+    trackAnalyticsEvent("whatsapp_click");
+  } else if (href.startsWith("mailto:")) {
+    trackAnalyticsEvent("email_click");
+  }
+});
+
 if (header && mobileMenuToggle && mobileMenu) {
   const closeMobileMenu = () => {
     header.classList.remove("menu-open");
@@ -215,6 +446,7 @@ if (form && statusMessage) {
         status: response.status,
         result,
       });
+      trackAnalyticsEvent("form_submit_success");
       form.reset();
       showContactSuccess();
     } catch (error) {
