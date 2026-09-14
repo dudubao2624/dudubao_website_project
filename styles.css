@@ -229,7 +229,7 @@ a {
 }
 
 .hero-slide[hidden] {
-  display: grid;
+  display: none;
 }
 
 .hero-media,
@@ -811,14 +811,25 @@ h3 {
 }
 
 .contact-section {
+  position: relative;
+  overflow: hidden;
   padding-top: clamp(72px, 8vw, 118px);
   padding-bottom: clamp(72px, 8vw, 118px);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.94), rgba(255, 255, 255, 0.94)),
-    url("assets/optimized/contact-cta-bg-1200.jpg") center / cover;
+  background: var(--white);
+}
+
+.contact-background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.035;
 }
 
 .contact-layout {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 680px);
   justify-content: center;
@@ -2675,9 +2686,7 @@ body {
 }
 
 .contact-section {
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.965), rgba(255, 255, 255, 0.965)),
-    url("assets/optimized/contact-cta-bg-1200.jpg") center / cover;
+  background: var(--white);
 }
 
 .contact-form input,

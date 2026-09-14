@@ -46,8 +46,8 @@
       }
     </script>
     <link rel="preload" as="image" href="assets/optimized/carousel-01-production.jpg?v=20260714-light-premium">
-    <link rel="stylesheet" href="styles.css?v=20260914-production-v1">
-    <script src="script.js?v=20260911-analytics-consent-v1" defer></script>
+    <link rel="stylesheet" href="styles.css?v=20260914-mobile-image-p0">
+    <script src="script.js?v=20260914-mobile-image-p0" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -216,6 +216,7 @@
                 alt="Music Bell System magnetic toy innovation for product development"
                 loading="lazy"
                 decoding="async"
+                data-mobile-image-priority
               >
             </picture>
             <div>
@@ -236,6 +237,7 @@
                 alt="Light-up magnetic tile concept for custom magnetic toys"
                 loading="lazy"
                 decoding="async"
+                data-mobile-image-priority
               >
             </picture>
             <div>
@@ -256,6 +258,7 @@
                 alt="Magnetic Brick System product concept for toy brand ODM projects"
                 loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
             <div>
@@ -276,6 +279,7 @@
                 alt="Large EPP magnetic building system for education and activity channels"
                 loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
             <div>
@@ -335,9 +339,9 @@
               width="1100"
               height="733"
               alt="DUDUBAO magnetic play system product range for B2B buyers"
-              loading="eager"
-              fetchpriority="high"
+              loading="lazy"
               decoding="async"
+              data-image-preheat
             >
           </picture>
         </div>
@@ -351,8 +355,9 @@
                 width="680"
                 height="900"
                 alt="Rainbow magnetic tiles for private label magnetic tile programs"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
             <h3>Magnetic Tiles</h3>
@@ -367,8 +372,9 @@
                 width="900"
                 height="600"
                 alt="Magnetic ball run system for product line expansion"
-                loading="eager"
+                loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
             <h3>Ball Runs & Motion</h3>
@@ -385,6 +391,7 @@
                 alt="STEM magnetic toy system for education channels"
                 loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
             <h3>STEM Systems</h3>
@@ -401,6 +408,7 @@
                 alt="Magnetic toy connectors and accessories for scalable play systems"
                 loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
             <h3>Expansion & Accessories</h3>
@@ -432,6 +440,7 @@
                   alt="Magnetic toy product innovation concept for differentiated play systems"
                   loading="lazy"
                   decoding="async"
+                  data-image-preheat
                 >
               </picture>
             </div>
@@ -450,6 +459,7 @@
                   alt="ODM development support for private label magnetic toys"
                   loading="lazy"
                   decoding="async"
+                  data-image-preheat
                 >
               </picture>
             </div>
@@ -468,6 +478,7 @@
                   alt="Toy compliance support for magnetic play system development"
                   loading="lazy"
                   decoding="async"
+                  data-image-preheat
                 >
               </picture>
             </div>
@@ -486,6 +497,7 @@
                   alt="Scalable magnetic toy product system planning for B2B buyers"
                   loading="lazy"
                   decoding="async"
+                  data-image-preheat
                 >
               </picture>
             </div>
@@ -532,6 +544,7 @@
                 alt="Private label magnetic tiles and ODM packaging customization"
                 loading="lazy"
                 decoding="async"
+                data-image-preheat
               >
             </picture>
           </div>
@@ -549,7 +562,7 @@
             </p>
           </div>
           <div class="manufacturing-video-card">
-            <video controls playsinline preload="metadata" poster="assets/videos/factory-video-poster.jpg">
+            <video controls playsinline preload="none" poster="assets/videos/factory-video-poster.jpg">
               <source src="assets/videos/factory-video.mp4" type="video/mp4">
             </video>
           </div>
@@ -557,6 +570,17 @@
       </section>
 
       <section class="section contact-section" id="contact">
+        <img
+          class="contact-background"
+          src="assets/optimized/contact-cta-bg-1200.jpg"
+          width="1200"
+          height="799"
+          alt=""
+          loading="lazy"
+          fetchpriority="low"
+          decoding="async"
+          aria-hidden="true"
+        >
         <div class="container contact-layout" data-contact-layout>
           <div class="success-card" data-contact-success hidden>
             <div class="success-icon" aria-hidden="true">

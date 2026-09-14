@@ -9,6 +9,34 @@ const contactLayout = document.querySelector("[data-contact-layout]");
 const contactSuccess = document.querySelector("[data-contact-success]");
 const returnHomeLink = document.querySelector("[data-return-home]");
 const heroCarousel = document.querySelector("[data-hero-carousel]");
+const mobilePriorityImages = document.querySelectorAll("img[data-mobile-image-priority]");
+const preheatImages = document.querySelectorAll("img[data-image-preheat]");
+
+if (window.matchMedia("(max-width: 768px)").matches) {
+  mobilePriorityImages.forEach((image) => {
+    image.loading = "eager";
+    image.removeAttribute("data-mobile-image-priority");
+  });
+}
+
+if ("IntersectionObserver" in window && preheatImages.length) {
+  const imagePreheatObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.loading = "eager";
+        entry.target.removeAttribute("data-image-preheat");
+        observer.unobserve(entry.target);
+      });
+    },
+    { rootMargin: "0px 0px 1100px 0px" }
+  );
+
+  preheatImages.forEach((image) => imagePreheatObserver.observe(image));
+}
 
 const analyticsConsentStorageKey = "dudubao_analytics_consent_v1";
 const googleAnalyticsId = "G-R1SKJ6HSXM";
