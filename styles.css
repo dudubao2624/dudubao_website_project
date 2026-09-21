@@ -582,6 +582,46 @@ h3 {
   margin-bottom: 0;
 }
 
+.product-card-media {
+  display: block;
+}
+
+.product-card-media:focus-visible,
+.feature-card h3 a:focus-visible,
+.system-grid h3 a:focus-visible,
+.product-detail-link:focus-visible {
+  outline: 3px solid rgba(22, 132, 216, 0.45);
+  outline-offset: 4px;
+}
+
+.feature-card h3 a:hover,
+.system-grid h3 a:hover,
+.product-detail-link:hover {
+  color: var(--blue-dark);
+}
+
+.product-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--blue-dark);
+  font-size: 0.9rem;
+  font-weight: 850;
+}
+
+.feature-card .product-detail-link,
+.system-grid article .product-detail-link {
+  color: var(--blue-dark);
+}
+
+.system-grid article .product-detail-link {
+  padding-right: 20px;
+  padding-bottom: 22px;
+  padding-left: 20px;
+  margin-top: auto;
+}
+
 .tag {
   margin-bottom: 8px;
   color: var(--coral);
@@ -1071,7 +1111,7 @@ h3 {
   color: var(--white);
   pointer-events: auto;
   box-shadow: 0 14px 30px rgba(18, 37, 61, 0.2);
-  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, opacity 160ms ease;
 }
 
 .floating-whatsapp:hover,
@@ -2195,6 +2235,13 @@ h3 {
 
   .floating-quote {
     max-width: calc(100vw - 92px);
+  }
+
+  .floating-contact.is-form-zone .floating-quote {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(12px);
   }
 }
 

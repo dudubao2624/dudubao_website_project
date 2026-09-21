@@ -11,6 +11,8 @@ const returnHomeLink = document.querySelector("[data-return-home]");
 const heroCarousel = document.querySelector("[data-hero-carousel]");
 const mobilePriorityImages = document.querySelectorAll("img[data-mobile-image-priority]");
 const preheatImages = document.querySelectorAll("img[data-image-preheat]");
+const productInterestSelect = document.querySelector('select[name="product-interest"]');
+const floatingContact = document.querySelector(".floating-contact");
 
 if (window.matchMedia("(max-width: 768px)").matches) {
   mobilePriorityImages.forEach((image) => {
@@ -41,16 +43,31 @@ if ("IntersectionObserver" in window && preheatImages.length) {
 const analyticsConsentStorageKey = "dudubao_analytics_consent_v1";
 const googleAnalyticsId = "G-R1SKJ6HSXM";
 const clarityProjectId = "ygnxvami74";
-const analyticsEventNames = new Set(["form_submit_success", "whatsapp_click", "email_click"]);
+const isLocalAnalyticsTest = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+const analyticsEventNames = new Set([
+  "form_submit_success",
+  "whatsapp_click",
+  "email_click",
+  "product_detail_click",
+  "product_inquiry_click",
+]);
+const analyticsProductFamilies = new Set(["music_magnetic_systems", "magnetic_tiles"]);
+const analyticsSourceSections = new Set(["featured_innovations", "product_system"]);
 const analyticsState = {
   googleInitialized: false,
   clarityInitialized: false,
+  consent: null,
 };
 
 const readAnalyticsConsent = () => {
+  if (analyticsState.consent === "granted" || analyticsState.consent === "denied") {
+    return analyticsState.consent;
+  }
+
   try {
     const value = window.localStorage.getItem(analyticsConsentStorageKey);
-    return value === "granted" || value === "denied" ? value : null;
+    analyticsState.consent = value === "granted" || value === "denied" ? value : null;
+    return analyticsState.consent;
   } catch (error) {
     console.warn("DUDUBAO analytics preference could not be read", error);
     return null;
@@ -58,6 +75,10 @@ const readAnalyticsConsent = () => {
 };
 
 const writeAnalyticsConsent = (value) => {
+  analyticsState.consent = value;
+  if (isLocalAnalyticsTest) {
+    document.documentElement.dataset.analyticsTestConsent = value;
+  }
   try {
     window.localStorage.setItem(analyticsConsentStorageKey, value);
   } catch (error) {
@@ -87,7 +108,7 @@ const initializeGoogleAnalytics = () => {
   window.gtag("js", new Date());
   window.gtag("config", googleAnalyticsId);
 
-  if (!document.getElementById("dudubao-ga4-script")) {
+  if (!isLocalAnalyticsTest && !document.getElementById("dudubao-ga4-script")) {
     const googleScript = document.createElement("script");
     googleScript.id = "dudubao-ga4-script";
     googleScript.async = true;
@@ -111,7 +132,7 @@ const initializeClarity = () => {
     analytics_Storage: "granted",
   });
 
-  if (!document.getElementById("dudubao-clarity-script")) {
+  if (!isLocalAnalyticsTest && !document.getElementById("dudubao-clarity-script")) {
     const clarityScript = document.createElement("script");
     clarityScript.id = "dudubao-clarity-script";
     clarityScript.async = true;
@@ -127,6 +148,9 @@ const initializeAnalytics = () => {
 
   initializeGoogleAnalytics();
   initializeClarity();
+  if (isLocalAnalyticsTest) {
+    document.documentElement.dataset.analyticsTestInitialized = "true";
+  }
 };
 
 const clearGoogleAnalyticsCookies = () => {
@@ -176,13 +200,43 @@ const revokeAnalytics = () => {
   }
 };
 
-const trackAnalyticsEvent = (eventName) => {
+const sanitizeAnalyticsParameters = (eventName, parameters) => {
+  if (eventName === "product_detail_click") {
+    const { product_family: productFamily, source_section: sourceSection } = parameters;
+    return analyticsProductFamilies.has(productFamily) && analyticsSourceSections.has(sourceSection)
+      ? { product_family: productFamily, source_section: sourceSection }
+      : null;
+  }
+
+  if (eventName === "product_inquiry_click") {
+    const { product_family: productFamily } = parameters;
+    return analyticsProductFamilies.has(productFamily)
+      ? { product_family: productFamily }
+      : null;
+  }
+
+  return {};
+};
+
+const trackAnalyticsEvent = (eventName, parameters = {}) => {
   if (readAnalyticsConsent() !== "granted" || !analyticsEventNames.has(eventName)) {
     return;
   }
 
+  const safeParameters = sanitizeAnalyticsParameters(eventName, parameters);
+  if (!safeParameters) {
+    return;
+  }
+
+  if (isLocalAnalyticsTest) {
+    const testLog = JSON.parse(document.documentElement.dataset.analyticsTestEvents || "[]");
+    testLog.push({ event: eventName, ...safeParameters });
+    document.documentElement.dataset.analyticsTestEvents = JSON.stringify(testLog);
+  }
+
   if (analyticsState.googleInitialized && typeof window.gtag === "function") {
     window.gtag("event", eventName, {
+      ...safeParameters,
       send_to: googleAnalyticsId,
       transport_type: "beacon",
     });
@@ -254,11 +308,45 @@ const setupAnalyticsConsent = () => {
 
 setupAnalyticsConsent();
 
+const preselectProductInterest = () => {
+  if (!productInterestSelect) {
+    return;
+  }
+
+  const selectedProduct = new URLSearchParams(window.location.search).get("product");
+  if (!selectedProduct) {
+    return;
+  }
+
+  const matchingOption = Array.from(productInterestSelect.options).find(
+    (option) => option.value === selectedProduct || option.textContent.trim() === selectedProduct
+  );
+
+  if (matchingOption) {
+    productInterestSelect.value = matchingOption.value;
+  }
+};
+
+preselectProductInterest();
+
 document.addEventListener("click", (event) => {
   const contactLink = event.target.closest("a[href]");
 
   if (!contactLink) {
     return;
+  }
+
+  if (contactLink.matches("[data-product-detail-click]")) {
+    trackAnalyticsEvent("product_detail_click", {
+      product_family: contactLink.dataset.productFamily,
+      source_section: contactLink.dataset.sourceSection,
+    });
+  }
+
+  if (contactLink.matches("[data-product-inquiry-click]")) {
+    trackAnalyticsEvent("product_inquiry_click", {
+      product_family: contactLink.dataset.productFamily,
+    });
   }
 
   const href = contactLink.getAttribute("href") || "";
@@ -268,6 +356,40 @@ document.addEventListener("click", (event) => {
     trackAnalyticsEvent("email_click");
   }
 });
+
+const setupMobileFormCtaYield = () => {
+  if (!form || !floatingContact) {
+    return;
+  }
+
+  const mobileViewport = window.matchMedia("(max-width: 768px)");
+  const setFormZoneState = (isInFormZone) => {
+    floatingContact.classList.toggle("is-form-zone", mobileViewport.matches && isInFormZone);
+  };
+
+  if ("IntersectionObserver" in window) {
+    const formZoneObserver = new IntersectionObserver(
+      ([entry]) => setFormZoneState(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    formZoneObserver.observe(form);
+    mobileViewport.addEventListener("change", () => {
+      const formBounds = form.getBoundingClientRect();
+      setFormZoneState(formBounds.top < window.innerHeight && formBounds.bottom > 0);
+    });
+    return;
+  }
+
+  const updateFormZoneState = () => {
+    const formBounds = form.getBoundingClientRect();
+    setFormZoneState(formBounds.top < window.innerHeight && formBounds.bottom > 0);
+  };
+  window.addEventListener("scroll", updateFormZoneState, { passive: true });
+  window.addEventListener("resize", updateFormZoneState);
+  updateFormZoneState();
+};
+
+setupMobileFormCtaYield();
 
 if (header && mobileMenuToggle && mobileMenu) {
   const closeMobileMenu = () => {
