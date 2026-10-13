@@ -43,7 +43,12 @@ if ("IntersectionObserver" in window && preheatImages.length) {
 const analyticsConsentStorageKey = "dudubao_analytics_consent_v1";
 const googleAnalyticsId = "G-R1SKJ6HSXM";
 const clarityProjectId = "ygnxvami74";
-const isLocalAnalyticsTest = ["localhost", "127.0.0.1"].includes(window.location.hostname);
+// Only the verified canonical production origin may use the production trackers.
+const analyticsProductionHosts = new Set(["www.dudubaotoys.com"]);
+const isProductionAnalytics =
+  window.location.protocol === "https:" &&
+  analyticsProductionHosts.has(window.location.hostname) &&
+  (window.location.port === "" || window.location.port === "443");
 const analyticsEventNames = new Set([
   "form_submit_success",
   "whatsapp_click",
@@ -57,13 +62,10 @@ const analyticsState = {
   googleInitialized: false,
   clarityInitialized: false,
   consent: null,
+  revoking: false,
 };
 
 const readAnalyticsConsent = () => {
-  if (analyticsState.consent === "granted" || analyticsState.consent === "denied") {
-    return analyticsState.consent;
-  }
-
   try {
     const value = window.localStorage.getItem(analyticsConsentStorageKey);
     analyticsState.consent = value === "granted" || value === "denied" ? value : null;
@@ -76,9 +78,6 @@ const readAnalyticsConsent = () => {
 
 const writeAnalyticsConsent = (value) => {
   analyticsState.consent = value;
-  if (isLocalAnalyticsTest) {
-    document.documentElement.dataset.analyticsTestConsent = value;
-  }
   try {
     window.localStorage.setItem(analyticsConsentStorageKey, value);
   } catch (error) {
@@ -87,7 +86,8 @@ const writeAnalyticsConsent = (value) => {
 };
 
 const initializeGoogleAnalytics = () => {
-  if (analyticsState.googleInitialized || window.dudubaoGoogleAnalyticsInitialized) {
+  if (!isProductionAnalytics || analyticsState.revoking ||
+      analyticsState.googleInitialized || window.dudubaoGoogleAnalyticsInitialized) {
     return;
   }
 
@@ -103,12 +103,18 @@ const initializeGoogleAnalytics = () => {
     ad_storage: "denied",
     ad_user_data: "denied",
     ad_personalization: "denied",
+    analytics_storage: "denied",
+  });
+  window.gtag("consent", "update", {
+    ad_storage: "denied",
+    ad_user_data: "denied",
+    ad_personalization: "denied",
     analytics_storage: "granted",
   });
   window.gtag("js", new Date());
   window.gtag("config", googleAnalyticsId);
 
-  if (!isLocalAnalyticsTest && !document.getElementById("dudubao-ga4-script")) {
+  if (!document.getElementById("dudubao-ga4-script")) {
     const googleScript = document.createElement("script");
     googleScript.id = "dudubao-ga4-script";
     googleScript.async = true;
@@ -118,7 +124,8 @@ const initializeGoogleAnalytics = () => {
 };
 
 const initializeClarity = () => {
-  if (analyticsState.clarityInitialized || window.dudubaoClarityInitialized) {
+  if (!isProductionAnalytics || analyticsState.revoking ||
+      analyticsState.clarityInitialized || window.dudubaoClarityInitialized) {
     return;
   }
 
@@ -132,7 +139,7 @@ const initializeClarity = () => {
     analytics_Storage: "granted",
   });
 
-  if (!isLocalAnalyticsTest && !document.getElementById("dudubao-clarity-script")) {
+  if (!document.getElementById("dudubao-clarity-script")) {
     const clarityScript = document.createElement("script");
     clarityScript.id = "dudubao-clarity-script";
     clarityScript.async = true;
@@ -142,22 +149,19 @@ const initializeClarity = () => {
 };
 
 const initializeAnalytics = () => {
-  if (readAnalyticsConsent() !== "granted") {
+  if (!isProductionAnalytics || analyticsState.revoking || readAnalyticsConsent() !== "granted") {
     return;
   }
 
   initializeGoogleAnalytics();
   initializeClarity();
-  if (isLocalAnalyticsTest) {
-    document.documentElement.dataset.analyticsTestInitialized = "true";
-  }
 };
 
-const clearGoogleAnalyticsCookies = () => {
+const clearAnalyticsCookies = () => {
   const cookieNames = document.cookie
     .split(";")
     .map((cookie) => cookie.split("=")[0].trim())
-    .filter((name) => /^_ga(?:_|$)|^_gid$|^_gat(?:_|$)/.test(name));
+    .filter((name) => /^_ga(?:_|$)|^_gid$|^_gat(?:_|$)|^_clck$|^_clsk$/.test(name));
   const hostname = window.location.hostname;
   const hostnameParts = hostname.split(".");
   const parentDomain =
@@ -172,31 +176,97 @@ const clearGoogleAnalyticsCookies = () => {
   });
 };
 
+// One-use, per-tab bridge for the immediate consent-withdrawal reload only.
+const inquiryReloadDraftKey = "dudubao_inquiry_reload_draft_v1";
+const inquiryDraftFields = [
+  "name", "company", "email", "phone", "country", "business-type",
+  "product-interest", "estimated-quantity", "message",
+];
+const inquiryDraftLifetimeMs = 60000;
+const inquiryDraftMaxLength = 65536;
+
+const saveInquiryForConsentReload = () => {
+  try {
+    window.sessionStorage.removeItem(inquiryReloadDraftKey);
+    if (!form) return;
+    const values = {};
+    inquiryDraftFields.forEach((name) => {
+      const field = form.elements.namedItem(name);
+      if (field && typeof field.value === "string") values[name] = field.value;
+    });
+    if (!Object.values(values).some((value) => value !== "")) return;
+    const draft = JSON.stringify({
+      savedAt: Date.now(), path: window.location.pathname, values,
+    });
+    if (draft.length <= inquiryDraftMaxLength) {
+      window.sessionStorage.setItem(inquiryReloadDraftKey, draft);
+      // If a reload is interrupted, expire the bridge in the surviving document.
+      window.setTimeout(() => {
+        try { window.sessionStorage.removeItem(inquiryReloadDraftKey); } catch {}
+      }, inquiryDraftLifetimeMs);
+    }
+  } catch {
+    // Storage failure must never delay withdrawal or log customer information.
+  }
+};
+
+const restoreInquiryAfterConsentReload = () => {
+  try {
+    const raw = window.sessionStorage.getItem(inquiryReloadDraftKey);
+    // Consume before parsing/restoring, including invalid or expired entries.
+    window.sessionStorage.removeItem(inquiryReloadDraftKey);
+    if (!raw || !form || raw.length > inquiryDraftMaxLength ||
+        window.performance.getEntriesByType("navigation")[0]?.type !== "reload") return;
+    const draft = JSON.parse(raw);
+    const age = Date.now() - draft.savedAt;
+    if (!Number.isFinite(draft.savedAt) || age < 0 || age > inquiryDraftLifetimeMs ||
+        draft.path !== window.location.pathname || !draft.values ||
+        typeof draft.values !== "object") return;
+    inquiryDraftFields.forEach((name) => {
+      const field = form.elements.namedItem(name);
+      const value = draft.values[name];
+      if (!field || typeof value !== "string") return;
+      if (field.tagName === "SELECT" &&
+          !Array.from(field.options).some((option) => option.value === value)) return;
+      field.value = value;
+    });
+  } catch {
+    // Invalid/unavailable storage leaves the normal form usable; no payload logs.
+  }
+};
+
 const revokeAnalytics = () => {
+  // Block new business events before updating either SDK or flushing old data.
+  if (analyticsState.revoking) return;
   const trackersWereInitialized =
     analyticsState.googleInitialized || analyticsState.clarityInitialized;
+  analyticsState.revoking = Boolean(trackersWereInitialized);
+  window[`ga-disable-${googleAnalyticsId}`] = true;
 
-  if (analyticsState.googleInitialized && typeof window.gtag === "function") {
+  if (isProductionAnalytics && analyticsState.googleInitialized && typeof window.gtag === "function") {
     window.gtag("consent", "update", {
       ad_storage: "denied",
       ad_user_data: "denied",
       ad_personalization: "denied",
       analytics_storage: "denied",
     });
-    window[`ga-disable-${googleAnalyticsId}`] = true;
-    clearGoogleAnalyticsCookies();
   }
 
-  if (analyticsState.clarityInitialized && typeof window.clarity === "function") {
+  if (isProductionAnalytics && analyticsState.clarityInitialized && typeof window.clarity === "function") {
     window.clarity("consentv2", {
       ad_Storage: "denied",
       analytics_Storage: "denied",
     });
     window.clarity("consent", false);
+    window.clarity("stop");
   }
+  clearAnalyticsCookies();
 
   if (trackersWereInitialized) {
-    window.setTimeout(() => window.location.reload(), 0);
+    // Trackers are already disabled; preserve only this tab's immediate draft.
+    saveInquiryForConsentReload();
+    // Reload also removes automatic collectors and pending script loads.
+    window.location.reload();
   }
 };
 
@@ -219,19 +289,14 @@ const sanitizeAnalyticsParameters = (eventName, parameters) => {
 };
 
 const trackAnalyticsEvent = (eventName, parameters = {}) => {
-  if (readAnalyticsConsent() !== "granted" || !analyticsEventNames.has(eventName)) {
+  if (!isProductionAnalytics || analyticsState.revoking ||
+      readAnalyticsConsent() !== "granted" || !analyticsEventNames.has(eventName)) {
     return;
   }
 
   const safeParameters = sanitizeAnalyticsParameters(eventName, parameters);
   if (!safeParameters) {
     return;
-  }
-
-  if (isLocalAnalyticsTest) {
-    const testLog = JSON.parse(document.documentElement.dataset.analyticsTestEvents || "[]");
-    testLog.push({ event: eventName, ...safeParameters });
-    document.documentElement.dataset.analyticsTestEvents = JSON.stringify(testLog);
   }
 
   if (analyticsState.googleInitialized && typeof window.gtag === "function") {
@@ -248,6 +313,7 @@ const trackAnalyticsEvent = (eventName, parameters = {}) => {
 };
 
 const setupAnalyticsConsent = () => {
+  let lastSyncedConsent = readAnalyticsConsent();
   const consentBanner = document.createElement("section");
   consentBanner.className = "analytics-consent";
   consentBanner.hidden = true;
@@ -284,12 +350,14 @@ const setupAnalyticsConsent = () => {
 
   acceptButton.addEventListener("click", () => {
     writeAnalyticsConsent("granted");
+    lastSyncedConsent = "granted";
     closeConsentBanner();
     initializeAnalytics();
   });
 
   rejectButton.addEventListener("click", () => {
     writeAnalyticsConsent("denied");
+    lastSyncedConsent = "denied";
     closeConsentBanner();
     revokeAnalytics();
   });
@@ -298,15 +366,41 @@ const setupAnalyticsConsent = () => {
     button.addEventListener("click", () => openConsentBanner(true));
   });
 
-  const storedConsent = readAnalyticsConsent();
+  const syncAnalyticsConsent = () => {
+    const consent = readAnalyticsConsent();
+    // Focus/visibility alone must not dismiss explicitly opened settings.
+    if (consent === lastSyncedConsent) return;
+    lastSyncedConsent = consent;
+    if (consent === "granted") {
+      closeConsentBanner();
+      initializeAnalytics();
+    } else {
+      revokeAnalytics();
+      if (consent === "denied") closeConsentBanner();
+      else openConsentBanner();
+    }
+  };
+  window.addEventListener("storage", (event) => {
+    if (event.storageArea === window.localStorage &&
+        (event.key === analyticsConsentStorageKey || event.key === null)) {
+      syncAnalyticsConsent();
+    }
+  });
+  // Recheck when a suspended/background or back-forward cached page resumes.
+  window.addEventListener("pageshow", syncAnalyticsConsent);
+  window.addEventListener("focus", syncAnalyticsConsent);
+  document.addEventListener("visibilitychange", () => {
+    if (document.visibilityState === "visible") syncAnalyticsConsent();
+  });
+
+  const storedConsent = lastSyncedConsent;
   if (storedConsent === "granted") {
     initializeAnalytics();
-  } else if (storedConsent === null) {
-    openConsentBanner();
+  } else {
+    revokeAnalytics();
+    if (storedConsent === null) openConsentBanner();
   }
 };
-
-setupAnalyticsConsent();
 
 const preselectProductInterest = () => {
   if (!productInterestSelect) {
@@ -328,6 +422,9 @@ const preselectProductInterest = () => {
 };
 
 preselectProductInterest();
+// Restore after URL preselection, before any analytics library can initialize.
+restoreInquiryAfterConsentReload();
+setupAnalyticsConsent();
 
 document.addEventListener("click", (event) => {
   const contactLink = event.target.closest("a[href]");
