@@ -635,7 +635,7 @@ if (form && statusMessage) {
     const timeoutId = window.setTimeout(() => controller.abort(), requestTimeoutMs);
 
     formData.set("_subject", `New DUDUBAO inquiry from ${formData.get("company") || formData.get("name") || "website"}`);
-    formData.set("_url", window.location.href);
+    formData.set("_url", `${window.location.origin}/`);
 
     statusMessage.setAttribute("role", "status");
     statusMessage.textContent = "Sending your project details...";
@@ -654,6 +654,7 @@ if (form && statusMessage) {
 
       const response = await fetch(formSubmitEndpoint, {
         method: "POST",
+        referrerPolicy: "origin",
         headers: {
           Accept: "application/json",
         },
