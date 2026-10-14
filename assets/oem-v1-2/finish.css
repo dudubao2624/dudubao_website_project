@@ -1,0 +1,49 @@
+/* V1.2: readable review inputs and compact layout where photos are withheld. */
+.buyer-shortcuts {display:flex;gap:12px 24px;flex-wrap:wrap;margin:18px 0 8px;font-size:14px;font-weight:600}
+.buyer-shortcuts a {text-decoration:underline;text-underline-offset:4px;padding:10px 0}
+.oem-review-inputs {padding:clamp(24px,4vw,44px);background:#f2f7f7;border-top:3px solid #426b70;align-self:center;color:#263a3d}
+.oem-review-inputs h3 {font-size:clamp(24px,3vw,32px);line-height:1.2;margin:12px 0 20px}
+.oem-review-inputs p,.oem-review-inputs li {font-size:16px;line-height:1.7}
+.oem-review-inputs ul {padding-left:20px}
+.oem-page .oem-review-inputs h3,.oem-page .oem-review-inputs p,.oem-page .oem-review-inputs li {color:#263a3d}
+.oem-page .oem-review-inputs .oem-eyebrow {color:#426b70}
+.oem-page .oem-process-heading>p {color:#c7d7d9}
+.oem-page .oem-mid-cta {background:#263a3d}
+.oem-page .oem-inquiry input,.oem-page .oem-inquiry select,.oem-page .oem-inquiry textarea {font-size:16px;min-width:0;max-width:100%}
+.oem-page [hidden] {display:none!important}
+.oem-page .oem-success {scroll-margin-top:100px}
+.oem-page .oem-success h2 {color:#263a3d}
+.oem-page .oem-inquiry-layout.is-success>.oem-inquiry-copy {display:none}
+.oem-page .oem-trial {flex-wrap:wrap}
+.oem-page .oem-hero-layout,.oem-page .oem-customization-layout,.oem-page .oem-why-layout {grid-template-columns:minmax(0,1fr)}
+.oem-page .oem-hero-copy {max-width:1000px}
+.oem-page .oem-hero h1 {max-width:1000px}
+.oem-page .oem-hero-copy .oem-lede {max-width:800px}
+.oem-page .oem-product-grid {grid-template-columns:repeat(2,minmax(0,1fr))}
+.oem-page .oem-product-card,.oem-page .oem-product-card:nth-child(n) {display:block;grid-column:auto;grid-row:auto}
+.oem-page .oem-product-card .oem-product-body {padding:28px}
+.oem-page .brand {width:180px;height:auto;overflow:visible;padding:6px 10px}
+.oem-page .brand img {position:static;inset:auto;width:160px!important;height:auto;max-height:none;object-fit:contain;mix-blend-mode:normal}
+.oem-page .footer-logo {width:180px;height:auto;max-height:none;background:#fff;padding:10px;box-sizing:content-box}
+.oem-page .oem-form-note a {text-decoration:underline}
+.oem-page #inquiry-privacy {font-size:13px;line-height:1.6;color:#52696c;text-align:left;margin-bottom:18px}
+@media(max-width:560px){
+ .buyer-shortcuts {gap:0 18px}
+ .buyer-shortcuts a {min-height:44px;display:flex;align-items:center}
+ .oem-page .floating-contact {bottom:14px;right:12px}
+ .oem-page .floating-quote {display:none}
+ .oem-page .oem-inquiry {padding-bottom:88px}
+ .oem-page .oem-product-grid {grid-template-columns:minmax(0,1fr)}
+ .oem-page .oem-product-card .oem-product-body {padding:22px}
+}
+
+/* Minimal closeout: scoped contrast repair for the existing dark middle CTA. */
+.oem-page .oem-mid-cta {color:#ffffff}
+.oem-page .oem-mid-cta .oem-eyebrow {color:#bce5e8}
+.oem-page .oem-mid-cta h2 {color:#ffffff}
+.oem-page .oem-mid-cta p {color:#d5e3e5}
+.oem-page .oem-mid-cta .oem-button-light {color:#263a3d!important;background:#ffffff;border-color:#ffffff}
+.oem-page .oem-mid-cta .oem-button-outline {color:#ffffff!important;background:transparent;border-color:#bce5e8}
+.oem-page .oem-mid-cta .oem-button-light:hover {color:#263a3d!important;background:#e5f2f3;border-color:#e5f2f3}
+.oem-page .oem-mid-cta .oem-button-outline:hover {color:#263a3d!important;background:#e5f2f3;border-color:#e5f2f3}
+.oem-page .oem-mid-cta .oem-button:focus-visible {outline:3px solid #f5d480;outline-offset:5px}

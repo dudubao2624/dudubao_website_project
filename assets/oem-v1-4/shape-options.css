@@ -1,0 +1,48 @@
+/* Shape options module and accessible enlargement dialog. */
+#oem-shape-options {
+  display:grid;grid-template-columns:minmax(240px,.72fr) minmax(0,2fr);gap:30px;
+  align-items:center;min-width:0;margin:30px 0 36px;padding:30px;
+  color:var(--oem-ink);background:#fff;border:1px solid var(--oem-line);border-radius:var(--oem-radius);
+  scroll-margin-top:100px;
+}
+#oem-shape-options[hidden] {display:none!important}
+#oem-shape-options .shape-copy {min-width:0}
+#oem-shape-options h3 {margin:0 0 18px;font-size:clamp(24px,2.1vw,32px);line-height:1.15;letter-spacing:-.025em}
+#oem-shape-options .shape-copy>p {margin:0 0 22px;font-size:16px;line-height:1.7;color:var(--oem-muted)}
+#oem-shape-options button {font-family:inherit;cursor:pointer}
+#oem-shape-options .shape-view-button {display:inline-flex;align-items:center;justify-content:space-between;gap:12px;min-height:46px;padding:12px 16px;border:1px solid var(--oem-line);border-radius:10px;background:var(--oem-soft);color:var(--oem-brand-deep);font-size:14px;font-weight:700;text-align:left}
+#oem-shape-options .shape-copy>.shape-source {font-size:12px;margin:14px 0 0}
+#oem-shape-options .shape-figure {min-width:0;margin:0}
+#oem-shape-options .shape-chart-button {display:block;width:100%;padding:0;border:0;background:transparent;cursor:zoom-in}
+#oem-shape-options .shape-chart-button img {display:block;width:100%;height:auto;max-width:100%;border-radius:8px}
+#oem-shape-options figcaption {padding-top:12px;font-size:12px;line-height:1.5;color:var(--oem-muted);text-align:center}
+#oem-shape-options button:focus-visible,#oem-shape-options .shape-scroll:focus-visible {outline:3px solid var(--oem-brand);outline-offset:4px}
+#oem-shape-dialog {width:min(1240px,calc(100vw - 32px));max-width:calc(100vw - 32px);height:min(900px,calc(100dvh - 32px));max-height:calc(100dvh - 32px);margin:auto;padding:0;border:1px solid var(--oem-line);border-radius:18px;background:#fff;color:var(--oem-ink);box-sizing:border-box;overflow:hidden}
+#oem-shape-dialog[open] {display:flex;flex-direction:column}
+#oem-shape-dialog::backdrop {background:rgba(24,42,47,.66)}
+#oem-shape-dialog .shape-dialog-header {display:flex;gap:16px;align-items:center;justify-content:space-between;padding:18px 22px 12px;flex-shrink:0}
+#oem-shape-dialog h2 {margin:0;font-size:24px;line-height:1.2;letter-spacing:-.02em}
+#oem-shape-dialog button {min-height:44px;padding:9px 13px;border:1px solid var(--oem-line);border-radius:8px;background:var(--oem-soft);color:var(--oem-ink);font-size:14px;font-weight:700;white-space:nowrap}
+#oem-shape-dialog .shape-dialog-tools {display:flex;gap:16px;align-items:center;padding:0 22px 14px;flex-shrink:0}
+#oem-shape-dialog .shape-dialog-tools p {margin:0;font-size:13px;line-height:1.5;color:var(--oem-muted)}
+#oem-shape-dialog .shape-scroll {flex:1;min-width:0;min-height:0;overflow:auto;overscroll-behavior:contain;touch-action:pan-x pan-y pinch-zoom;border-block:1px solid var(--oem-line);background:#fdfbfc}
+#oem-shape-dialog .shape-scroll img {display:block;width:1578px;height:auto;max-width:none;max-height:none;margin:0;object-fit:contain}
+#oem-shape-dialog .shape-scroll.is-fit {display:flex;align-items:center;justify-content:center}
+#oem-shape-dialog .shape-scroll.is-fit img {width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain}
+#oem-shape-dialog .shape-dialog-source {margin:0;padding:9px 22px;font-size:12px;line-height:1.5;color:var(--oem-muted);flex-shrink:0}
+@media(max-width:900px){
+  #oem-shape-options {grid-template-columns:minmax(0,1fr);gap:24px;padding:24px}
+  #oem-shape-options .shape-copy {max-width:680px}
+}
+@media(max-width:560px){
+  #oem-shape-options {margin:26px 0 30px;padding:20px 16px;gap:22px;scroll-margin-top:88px}
+  #oem-shape-options h3 {font-size:25px}
+  #oem-shape-options .shape-copy>p {font-size:15px;line-height:1.65;margin-bottom:18px}
+  #oem-shape-options .shape-view-button {width:100%}
+  #oem-shape-dialog {width:calc(100vw - 16px);max-width:calc(100vw - 16px);height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);border-radius:12px}
+  #oem-shape-dialog .shape-dialog-header {gap:10px;padding:14px 12px 10px}
+  #oem-shape-dialog h2 {font-size:19px}
+  #oem-shape-dialog .shape-dialog-tools {align-items:flex-start;gap:10px;padding:0 12px 12px}
+  #oem-shape-dialog .shape-dialog-tools p {font-size:12px}
+  #oem-shape-dialog .shape-dialog-source {padding:8px 12px}
+}

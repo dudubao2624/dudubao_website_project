@@ -1,0 +1,18 @@
+/* Accepted concise content layout. */
+.oem-page.oem-layout-v14 .oem-compliance-layout,
+.oem-page.oem-layout-v14 .oem-process-heading,
+.oem-page.oem-layout-v14 #why .oem-heading {
+  grid-template-columns:minmax(0,1fr);
+}
+.oem-page.oem-layout-v14 .oem-compliance-layout>div {max-width:940px}
+.oem-page.oem-layout-v14 .oem-process-grid {display:block}
+.oem-page.oem-layout-v14 .oem-process-steps {max-width:980px}
+.oem-page.oem-layout-v14 .oem-process-evidence {margin-top:4px;max-width:980px}
+.oem-page.oem-layout-v14 .concise-process-note {border-top:1px solid #d5e3e5;padding-top:18px;margin-bottom:0}
+.oem-page.oem-layout-v14 .oem-capability-grid>.concise-capabilities-label {grid-column:1/-1;margin:0;font-weight:700}
+.oem-page.oem-layout-v14 .oem-fact-card h3 {font-size:clamp(20px,1.6vw,24px);line-height:1.45;margin:0 0 18px}
+.oem-page.oem-layout-v14 .oem-fact-top {margin-bottom:18px}
+.oem-page.oem-layout-v14 .oem-standards small {flex-basis:100%}
+.oem-page.oem-layout-v14 .oem-why-list article:last-child {padding-bottom:0}
+
+.oem-page .oem-product-image picture { display: contents; }
