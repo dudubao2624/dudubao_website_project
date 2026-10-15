@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="500" viewBox="0 0 600 500" role="img" aria-labelledby="title desc">
+<title id="title">Market Requirements → Product/Version Review → Documentation Scope</title>
+<desc id="desc">A neutral three-step review diagram, not a certificate or test result.</desc>
+<rect width="600" height="500" fill="#f1f7f8"/>
+<g fill="#ffffff" stroke="#d5e3e6" stroke-width="2">
+<rect x="42" y="30" width="516" height="120" rx="14"/>
+<rect x="42" y="190" width="516" height="120" rx="14"/>
+<rect x="42" y="350" width="516" height="120" rx="14"/>
+</g>
+<g fill="#263e48" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="600" text-anchor="middle">
+<text x="300" y="80">Market<tspan x="300" dy="40">Requirements</tspan></text>
+<text x="300" y="240">Product / Version<tspan x="300" dy="40">Review</tspan></text>
+<text x="300" y="400">Documentation<tspan x="300" dy="40">Scope</tspan></text>
+</g>
+<g fill="none" stroke="#648e98" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+<path d="M300 159v21m-8-8 8 8 8-8"/><path d="M300 319v21m-8-8 8 8 8-8"/>
+</g></svg>
