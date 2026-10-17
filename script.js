@@ -180,7 +180,7 @@ const clearAnalyticsCookies = () => {
 const inquiryReloadDraftKey = "dudubao_inquiry_reload_draft_v1";
 const inquiryDraftFields = [
   "name", "company", "email", "phone", "country", "business-type",
-  "product-interest", "estimated-quantity", "message",
+  "product-interest", "requested-sku", "sourcing-preference", "estimated-quantity", "message",
 ];
 const inquiryDraftLifetimeMs = 60000;
 const inquiryDraftMaxLength = 65536;
@@ -421,9 +421,36 @@ const preselectProductInterest = () => {
   }
 };
 
+// SKU values come only from approved product cards, never from arbitrary URL text.
+const requestedSkuSelect = form?.querySelector('select[name="requested-sku"]');
+const requestedSkuField = form?.querySelector('[data-requested-sku-field]');
+const magneticTileSkus = new Map([
+  ["D01-C", "D01-C | 102 pieces | Rainbow"],
+  ["D10-C", "D10-C | 219 pieces | Rainbow"],
+  ["D01-M", "D01-M | 102 pieces | Pastel"],
+]);
+const syncRequestedSku = () => {
+  if (!requestedSkuSelect || !requestedSkuField) return;
+  const isMagneticTiles = productInterestSelect?.value === "Magnetic Tiles";
+  requestedSkuField.hidden = !isMagneticTiles;
+  requestedSkuSelect.disabled = !isMagneticTiles;
+  if (!isMagneticTiles) requestedSkuSelect.value = "";
+};
+const preselectRequestedSku = () => {
+  if (!requestedSkuSelect || productInterestSelect?.value !== "Magnetic Tiles") return;
+  const params = new URLSearchParams(window.location.search);
+  if (params.get("product") !== "Magnetic Tiles") return;
+  const value = magneticTileSkus.get(params.get("sku"));
+  if (value && !requestedSkuSelect.value) requestedSkuSelect.value = value;
+};
+
 preselectProductInterest();
+preselectRequestedSku();
 // Restore after URL preselection, before any analytics library can initialize.
 restoreInquiryAfterConsentReload();
+syncRequestedSku();
+productInterestSelect?.addEventListener("change", syncRequestedSku);
+form?.addEventListener("reset", () => window.setTimeout(syncRequestedSku, 0));
 setupAnalyticsConsent();
 
 document.addEventListener("click", (event) => {
