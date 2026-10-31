@@ -725,10 +725,20 @@ if (form && statusMessage) {
       showContactSuccess();
     } catch (error) {
       console.error("DUDUBAO contact form submission error", error);
-      statusMessage.textContent =
-        error.name === "AbortError"
-          ? "Email delivery timed out. Please try again shortly."
-          : error.message || "Unable to send your inquiry right now. Please try again shortly.";
+      // 仅供本地审核：已确认中文对应的英文定稿，尚未获准发布。
+      // 只使用固定文案，不把第三方错误或客户输入插入 HTML。
+      statusMessage.innerHTML = `
+        <span style="display:block;padding:18px;border:1px solid #dce5e7;border-radius:10px;background:#f5f9f9;color:#263e43;font-size:15px;line-height:1.55;text-align:left;overflow-wrap:anywhere">
+          <strong style="display:block;margin-bottom:8px;font-size:18px;line-height:1.3">We couldn't confirm your submission</strong>
+          <span style="display:block;margin-bottom:10px">We couldn't confirm whether your inquiry was sent. Your details are still in the form.</span>
+          <span style="display:block">You can contact us directly:</span>
+          <span style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0">
+            <a href="mailto:ryan@dudubao.net" aria-label="Email DUDUBAO at ryan@dudubao.net" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1px solid #263e43;border-radius:7px;background:#263e43;color:#fff;text-decoration:none;font-weight:700;box-sizing:border-box">Email Us</a>
+            <a href="https://wa.me/8619357221813" target="_blank" rel="noopener" aria-label="Contact DUDUBAO on WhatsApp at +86 193 5722 1813" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1px solid #8ca2a6;border-radius:7px;background:#fff;color:#263e43;text-decoration:none;font-weight:700;box-sizing:border-box">WhatsApp</a>
+          </span>
+          <span style="display:block;font-size:14px;color:#52686d">Note: Submitting again may create a duplicate inquiry.</span>
+        </span>
+      `;
     } finally {
       window.clearTimeout(timeoutId);
       if (submitButton) {
