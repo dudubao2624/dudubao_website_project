@@ -22,10 +22,17 @@
     {
       "@type": "Organization",
       "@id": "https://www.dudubaotoys.com/#organization",
+      "legalName": "Hangzhou Benlun Technology Co., Ltd.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.dudubaotoys.com/assets/logo/logo.jpg",
+        "width": 720,
+        "height": 513
+      },
       "name": "DUDUBAO",
       "description": "Magnetic toy manufacturer and ODM product-development partner operated by Hangzhou Benlun Technology Co., Ltd.",
-      "url": "https://www.dudubaotoys.com/",
       "email": "ryan@dudubao.net",
+      "url": "https://www.dudubaotoys.com/",
       "sameAs": [
         "https://www.linkedin.com/company/dudubao-magnetic-toys/",
         "https://www.instagram.com/dudubaomanufacturer/"
@@ -51,6 +58,9 @@
       },
       "breadcrumb": {
         "@id": "https://www.dudubaotoys.com/oem-magnetic-tiles.html#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://www.dudubaotoys.com/#organization"
       }
     },
     {
@@ -88,7 +98,7 @@
           "name": "What can I customize for OEM magnetic tiles?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Discuss private-label logos, packaging, colors, set configuration and selected existing accessory combinations. Confirm feasibility and compatibility for the chosen set. New shapes, accessories, tooling and exclusive programs need separate development, testing, commercial and IP review."
+            "text": "Discuss private-label logos, packaging, colors, set configuration and selected existing accessory combinations. Confirm feasibility and compatibility for the chosen set. New shapes, accessories, tooling and dedicated development projects need separate development, testing, commercial and IP review."
           }
         },
         {
@@ -139,7 +149,10 @@
             "text": "Send SKU and version, quantity per color, market, destination, brand-stock or private-label preference, packaging, sample and documentation needs. Mixed-SKU production is reviewed separately; 500 sets in total does not automatically qualify."
           }
         }
-      ]
+      ],
+      "publisher": {
+        "@id": "https://www.dudubaotoys.com/#organization"
+      }
     }
   ]
 }</script>
@@ -152,6 +165,7 @@
   <link rel="stylesheet" href="assets/oem-v1-4/content.css?v=0086bd145b55"><link rel="stylesheet" href="assets/oem-v1-4/shape-options.css?v=480436e99ee8"><script src="assets/oem-v1-4/shape-options.js?v=3f01ebc3ad3e" defer></script>
     <link rel="stylesheet" href="product-options.css?v=335672091423">
 <link rel="stylesheet" href="buyer-pages.css?v=208-v1">
+<link rel="stylesheet" href="play-system.css?v=9b7e77e98306">
 </head>
   <body class="oem-page oem-layout-v14">
 
@@ -161,7 +175,7 @@
       <a class="brand" href="index.html" aria-label="DUDUBAO home">
         <img src="assets/oem-v1-2/logo.svg" width="490" height="168" alt="DUDUBAO logo">
       </a>
-      <nav class="main-nav" aria-label="Main navigation"><a href="wholesale.html">Wholesale</a><a href="products/selection.html">Products</a><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="#inquiry">Contact</a></nav>
+      <nav class="main-nav" aria-label="Main navigation"><a href="oem-magnetic-tiles.html" aria-current="page">OEM / ODM</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="#inquiry">Contact</a></nav>
       <div class="header-actions" aria-label="Trust and inquiry links">
         <a class="social-icon" href="https://www.linkedin.com/company/dudubao-magnetic-toys/" target="_blank" rel="noopener" aria-label="DUDUBAO on LinkedIn">
           <svg viewbox="0 0 24 24" aria-hidden="true"><path d="M6.94 8.98H3.78v10.1h3.16V8.98ZM5.36 4.92a1.83 1.83 0 1 0 0 3.66 1.83 1.83 0 0 0 0-3.66Zm13.86 8.36c0-3.04-1.62-4.46-3.78-4.46a3.25 3.25 0 0 0-2.94 1.62V8.98H9.48v10.1h3.15v-5c0-1.32.25-2.6 1.88-2.6 1.6 0 1.62 1.5 1.62 2.68v4.92h3.15l-.06-5.8Z"></path></svg>
@@ -172,7 +186,7 @@
         <a class="header-cta" href="#inquiry">Discuss Your Project</a>
       </div>
       <button class="mobile-menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
-      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="wholesale.html">Wholesale</a><a href="products/selection.html">Products</a><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="#inquiry">Contact</a><a href="wholesale.html#classic-sets">Five classic sets</a></nav>
+      <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="oem-magnetic-tiles.html" aria-current="page">OEM / ODM</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="#inquiry">Contact</a><a href="wholesale.html">Wholesale &amp; stock orders</a></nav>
     </header>
 
     <main class="oem-main" id="main">
@@ -187,7 +201,7 @@
               <a class="oem-button oem-button-primary" href="#inquiry">Discuss Your OEM Project <span aria-hidden="true">↗</span></a>
               <a class="oem-button oem-button-secondary" href="https://wa.me/8619357221813" target="_blank" rel="noopener">WhatsApp</a>
             </div>
-            <nav class="buyer-shortcuts" aria-label="Buyer quick links"><a href="#project-fit">MOQ, samples &amp; timing</a><a href="#compliance">Quality &amp; documentation</a></nav><p class="oem-microcopy"><span aria-hidden="true">●</span> Share your market, product direction, and estimated quantity so we can review next steps.</p>
+            <nav class="buyer-shortcuts" aria-label="Buyer quick links"><a href="play-system.html">Explore play systems</a><a href="#project-fit">MOQ, samples &amp; timing</a><a href="#compliance">Quality &amp; documentation</a></nav><p class="oem-microcopy"><span aria-hidden="true">●</span> Share your market, product direction, and estimated quantity so we can review next steps.</p>
           </div>
           <figure class="oem-hero-visual oem-photo-frame">
             <div class="oem-photo-stage">
@@ -229,7 +243,8 @@
         <aside class="oem-container oem-boundary-note" aria-label="Product availability note"><span aria-hidden="true">i</span><p>Specific SKUs, versions, configurations, compatibility, and test documentation are confirmed by project.</p></aside>
       </section>
 
-      <section class="oem-section oem-tint" id="customization" aria-labelledby="customization-title">
+      <section class="oem-section" id="platform-examples" aria-labelledby="platform-examples-title"><div class="oem-container"><p class="oem-eyebrow">FROM PLATFORM TO YOUR BRAND</p><h2 id="platform-examples-title">Choose the play idea. Define your own-brand version.</h2><div class="play-subsystems"><article class="play-subsystem"><h3>A03-T / A sound-led line</h3><p>Start from the 73-piece complete bell ball run. Review your palette, selected route and bell components, branded packaging and instructions. A05-C is a separate eight-bell, two-ball expansion.</p><a class="play-link" href="play-system.html#ball-runs">See the ball-run and bell platform →</a></article><article class="play-subsystem"><h3>B07-C / An engineering theme</h3><p>Start from the 101-piece mix of magnetic tiles, studded components and moving vehicle parts. Review colors, chosen connectors, configuration and packaging. Check the selected stud format and component fit.</p><a class="play-link" href="play-system.html#b07-construction">See the B07-C construction platform →</a></article></div><p class="play-note">Review existing shapes and component options for the selected system. New shapes, structures and tooling require separate development, testing and IP review.</p></div></section>
+<section class="oem-section oem-tint" id="customization" aria-labelledby="customization-title">
         <div class="oem-container oem-customization-layout">
 
           <div class="oem-customization-copy">
@@ -249,7 +264,7 @@
       <figcaption>Tap to enlarge and view dimensions</figcaption>
     </figure><dialog id="oem-shape-dialog" aria-labelledby="oem-shape-dialog-title" aria-describedby="oem-shape-dialog-help">
     <div class="shape-dialog-header">
-      <h2 id="oem-shape-dialog-title">Magnetic Tile Shapes &amp; Size Options</h2>
+      <h2 id="oem-shape-dialog-title">Enlarged Shape Reference</h2>
       <button type="button" class="shape-close" aria-label="Close shape chart" autofocus="">Close <span aria-hidden="true">×</span></button>
     </div>
     <div class="shape-dialog-tools">
@@ -285,12 +300,12 @@
 
       <section class="oem-section" id="why" aria-labelledby="why-title">
         <div class="oem-container oem-heading oem-heading-split"><div><p class="oem-eyebrow">07 · WHY DUDUBAO</p><h2 id="why-title">Build and Grow Your Magnetic Tile Range with DUDUBAO</h2></div></div>
-        <div class="oem-container oem-why-layout"><div class="oem-why-list"><article><span>01</span><div><h3>Start with Existing Product Directions</h3><p>Compare standard tiles, clear-tube marble runs, MINI and bell ball runs. Review the chosen configuration and sample, then plan how the set fits your brand range. <a href="wholesale.html#classic-sets">Compare five classic sets →</a></p></div></article><article><span>02</span><div><h3>Create a Distinctive Brand Range</h3><p>Combine your branding and packaging with a selected play direction. The Patented Windmill Tile has design records for China and Europe only. Specific component use and IP scope are reviewed for each project; a design record is separate from safety testing.</p></div></article><article><span>03</span><div><h3>Make Clearer Development &amp; Sourcing Decisions</h3><p>Work through the brief, sample, artwork, configuration and documentation with one project pathway. New accessories, structures, tooling and exclusive programs are evaluated for feasibility, testing, quantity, commercial terms and IP scope.</p></div></article></div></div>
+        <div class="oem-container oem-why-layout"><div class="oem-why-list"><article><span>01</span><div><h3>Start with Existing Product Directions</h3><p>Compare standard tiles, clear-tube marble runs, MINI and bell ball runs. Review the chosen configuration and sample, then plan how the set fits your brand range. <a href="wholesale.html#classic-sets">Compare five classic sets →</a></p></div></article><article><span>02</span><div><h3>Create a Distinctive Brand Range</h3><p>Combine your branding and packaging with a selected play direction. The Patented Windmill Tile has design records for China and Europe only. Specific component use and IP scope are reviewed for each project; a design record is separate from safety testing.</p></div></article><article><span>03</span><div><h3>Make Clearer Development &amp; Sourcing Decisions</h3><p>Work through the brief, sample, artwork, configuration and documentation with one project pathway. New accessories, structures, tooling and dedicated development projects are evaluated for feasibility, testing, quantity, commercial terms and IP scope.</p></div></article></div></div>
       </section>
 
       <section class="oem-section oem-tint" id="faq" aria-labelledby="faq-title">
         <div class="oem-container oem-faq-layout"><div class="oem-faq-heading"><p class="oem-eyebrow">08 · BUYER FAQ</p><h2 id="faq-title">OEM Magnetic Tiles FAQ</h2></div>
-          <div class="oem-accordion"><details><summary><span>01</span>What can I customize for OEM magnetic tiles?<i aria-hidden="true"></i></summary><p>Discuss private-label logos, packaging, colors, set configuration and selected existing accessory combinations. Confirm feasibility and compatibility for the chosen set. New shapes, accessories, tooling and exclusive programs need separate development, testing, commercial and IP review.</p></details><details><summary><span>02</span>What is the MOQ for private-label magnetic tiles?<i aria-hidden="true"></i></summary><p>For DUDUBAO-branded stock, small orders are supported subject to actual inventory. Custom and private-label orders start at 500 sets per SKU. Special packaging, dedicated accessories, or custom requirements may require a higher MOQ, confirmed during project review.</p></details><details><summary><span>03</span>How long does sampling take and who pays?<i aria-hidden="true"></i></summary><p>In-stock samples typically take about 7 days; color or packaging samples about 15 days after requirements, artwork, payment and necessary approvals are complete. Standard samples are normally charged, with international courier paid by the buyer. New development is reviewed separately.</p></details><details><summary><span>04</span>What is the production lead time?<i aria-hidden="true"></i></summary><p>Typical production takes 30–40 days, or 40–50 days in peak periods, after agreed payment and confirmation of configuration, colors, packaging and order details. Testing may affect timing. Stock dispatch and new development are confirmed separately.</p></details><details><summary><span>05</span>Which safety reports can I review?<i aria-hidden="true"></i></summary><p>Third-party test reports (EN71, AS/NZS) available on request. Share your selected product and destination with your request.</p></details><details><summary><span>06</span>What is the custom order process?<i aria-hidden="true"></i></summary><p>Share the product, market and quantity brief; select the configuration and branding; review feasibility, quotation and timing; approve samples, artwork and applicable documents; then confirm order terms, production review and shipment arrangements.</p></details><details><summary><span>07</span>What should I send for a quotation?<i aria-hidden="true"></i></summary><p>Send SKU and version, quantity per color, market, destination, brand-stock or private-label preference, packaging, sample and documentation needs. Mixed-SKU production is reviewed separately; 500 sets in total does not automatically qualify.</p></details></div>
+          <div class="oem-accordion"><details><summary><span>01</span>What can I customize for OEM magnetic tiles?<i aria-hidden="true"></i></summary><p>Discuss private-label logos, packaging, colors, set configuration and selected existing accessory combinations. Confirm feasibility and compatibility for the chosen set. New shapes, accessories, tooling and dedicated development projects need separate development, testing, commercial and IP review.</p></details><details><summary><span>02</span>What is the MOQ for private-label magnetic tiles?<i aria-hidden="true"></i></summary><p>For DUDUBAO-branded stock, small orders are supported subject to actual inventory. Custom and private-label orders start at 500 sets per SKU. Special packaging, dedicated accessories, or custom requirements may require a higher MOQ, confirmed during project review.</p></details><details><summary><span>03</span>How long does sampling take and who pays?<i aria-hidden="true"></i></summary><p>In-stock samples typically take about 7 days; color or packaging samples about 15 days after requirements, artwork, payment and necessary approvals are complete. Standard samples are normally charged, with international courier paid by the buyer. New development is reviewed separately.</p></details><details><summary><span>04</span>What is the production lead time?<i aria-hidden="true"></i></summary><p>Typical production takes 30–40 days, or 40–50 days in peak periods, after agreed payment and confirmation of configuration, colors, packaging and order details. Testing may affect timing. Stock dispatch and new development are confirmed separately.</p></details><details><summary><span>05</span>Which safety reports can I review?<i aria-hidden="true"></i></summary><p>Third-party test reports (EN71, AS/NZS) available on request. Share your selected product and destination with your request.</p></details><details><summary><span>06</span>What is the custom order process?<i aria-hidden="true"></i></summary><p>Share the product, market and quantity brief; select the configuration and branding; review feasibility, quotation and timing; approve samples, artwork and applicable documents; then confirm order terms, production review and shipment arrangements.</p></details><details><summary><span>07</span>What should I send for a quotation?<i aria-hidden="true"></i></summary><p>Send SKU and version, quantity per color, market, destination, brand-stock or private-label preference, packaging, sample and documentation needs. Mixed-SKU production is reviewed separately; 500 sets in total does not automatically qualify.</p></details></div>
         </div>
       </section>
 
@@ -318,7 +333,7 @@
           </form>
         </div>
       </section>
-    <nav class="buyer-directory" aria-label="Buyer resources"><a href="wholesale.html">Wholesale sourcing</a><a href="products/d01-magnetic-tiles.html">D01 · 2 colors</a><a href="products/d10-c-large-magnetic-tiles.html">D10-C · 219</a><a href="products/a01-t-magnetic-marble-run.html">A01-T · Marble run</a><a href="products/m02-c-mini-magnetic-tiles.html">M02-C · MINI</a><a href="products/a03-t-bell-ball-run.html">A03-T · Bell play</a><a href="quality-certification.html">Quality &amp; reports</a></nav></main><div class="floating-contact" aria-label="Quick WhatsApp contact"><a class="floating-whatsapp" href="https://wa.me/8619357221813" target="_blank" rel="noopener" aria-label="Chat with DUDUBAO on WhatsApp"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12.04 4a7.82 7.82 0 0 0-6.72 11.82L4.5 20l4.27-.79A7.82 7.82 0 1 0 12.04 4Zm0 2a5.82 5.82 0 1 1-2.62 11.02l-.3-.15-2.08.39.4-2.02-.17-.31A5.82 5.82 0 0 1 12.04 6Zm-2.2 3.2c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.64 0 .96.7 1.89.8 2.02.1.13 1.37 2.18 3.4 2.97 1.68.66 2.02.53 2.39.5.36-.04 1.17-.48 1.34-.94.17-.46.17-.86.12-.94-.05-.08-.18-.13-.38-.23-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.2-.51.64-.62.77-.12.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.44-1.06-.61-1.45-.16-.38-.32-.33-.44-.34h-.44Z"></path></svg></a><a class="floating-quote" href="https://wa.me/8619357221813" target="_blank" rel="noopener" aria-label="Discuss your magnetic tile project on WhatsApp"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8.8L4 19.2V5Zm2 2v7.78L8.04 13H18V7H6Zm3 2h6v2H9V9Z"></path></svg><span>Discuss Your Project</span></a></div>
+    <nav class="buyer-directory" aria-label="Buyer resources"><a href="play-system.html">Play systems</a><a href="wholesale.html">Wholesale sourcing</a><a href="products/d01-magnetic-tiles.html">D01 · 2 colors</a><a href="products/d10-c-large-magnetic-tiles.html">D10-C · 219</a><a href="products/a01-t-magnetic-marble-run.html">A01-T · Marble run</a><a href="products/m02-c-mini-magnetic-tiles.html">M02-C · MINI</a><a href="products/a03-t-bell-ball-run.html">A03-T · Bell play</a><a href="quality-certification.html">Quality &amp; reports</a></nav></main><div class="floating-contact" aria-label="Quick WhatsApp contact"><a class="floating-whatsapp" href="https://wa.me/8619357221813" target="_blank" rel="noopener" aria-label="Chat with DUDUBAO on WhatsApp"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M12.04 4a7.82 7.82 0 0 0-6.72 11.82L4.5 20l4.27-.79A7.82 7.82 0 1 0 12.04 4Zm0 2a5.82 5.82 0 1 1-2.62 11.02l-.3-.15-2.08.39.4-2.02-.17-.31A5.82 5.82 0 0 1 12.04 6Zm-2.2 3.2c-.13 0-.34.05-.52.25-.18.2-.69.67-.69 1.64 0 .96.7 1.89.8 2.02.1.13 1.37 2.18 3.4 2.97 1.68.66 2.02.53 2.39.5.36-.04 1.17-.48 1.34-.94.17-.46.17-.86.12-.94-.05-.08-.18-.13-.38-.23-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1-.13.2-.51.64-.62.77-.12.13-.23.15-.43.05-.2-.1-.84-.31-1.6-.99-.59-.53-.99-1.18-1.1-1.38-.12-.2-.01-.31.09-.41.09-.09.2-.23.3-.35.1-.12.13-.2.2-.33.07-.13.03-.25-.02-.35-.05-.1-.44-1.06-.61-1.45-.16-.38-.32-.33-.44-.34h-.44Z"></path></svg></a><a class="floating-quote" href="https://wa.me/8619357221813" target="_blank" rel="noopener" aria-label="Discuss your magnetic tile project on WhatsApp"><svg viewbox="0 0 24 24" aria-hidden="true"><path d="M4 5h16v10H8.8L4 19.2V5Zm2 2v7.78L8.04 13H18V7H6Zm3 2h6v2H9V9Z"></path></svg><span>Discuss Your Project</span></a></div>
 
     <footer class="site-footer">
       <div class="footer-main"><div class="container footer-grid">
