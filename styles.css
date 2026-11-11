@@ -271,7 +271,8 @@ a {
 }
 
 .hero-media-05 {
-  background-image: url("assets/p0-draft/range-building.jpg");
+  background-image: url("assets/home-brand/range-1600.jpg");
+  background-image: image-set(url("assets/home-brand/range-1600.webp") type("image/webp"), url("assets/home-brand/range-1600.jpg") type("image/jpeg"));
   background-position: center center;
   background-size: auto 96%;
 }
