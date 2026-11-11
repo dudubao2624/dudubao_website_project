@@ -271,7 +271,7 @@ a {
 }
 
 .hero-media-05 {
-  background-image: url("assets/optimized/carousel-05-production.jpg?v=20260714-light-premium");
+  background-image: url("assets/p0-draft/range-building.jpg");
   background-position: center center;
   background-size: auto 96%;
 }
@@ -535,7 +535,7 @@ h3 {
 
 .innovation-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
@@ -3090,3 +3090,15 @@ textarea:focus-visible {
     border-radius: 12px;
   }
 }
+
+/* P0 draft images retain the complete existing product-library artwork. */
+.feature-card img[data-p0-image],
+.why-image img[data-p0-image] {
+  object-fit: contain;
+  object-position: center;
+  background: #fff;
+  transform: none;
+}
+
+/* P1: educational slide uses a basic-tile build, not a product-family collage. */
+.hero-media-05 { background-size: contain; background-repeat: no-repeat; background-color: #f6f8fa; }

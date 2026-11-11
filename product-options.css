@@ -1,0 +1,23 @@
+.p1-model-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr)); gap:24px; margin:24px 0; }
+.p1-model-card { padding:24px; border:1px solid #dde2e7; border-radius:16px; background:#fff; min-width:0; }
+.p1-model-card img,.p1-reference { display:block; width:100%; height:280px; object-fit:contain; background:#fff; }
+.p1-model-card h3 { font-size:1.15rem; line-height:1.5; margin:16px 0 12px; }
+.p1-model-grid figure { margin:0; padding:16px; background:#fff; border:1px solid #dde2e7; border-radius:16px; }
+.p1-model-grid figcaption,.p1-documentation { font-size:.92rem; line-height:1.65; margin-top:12px; }
+
+.selection-links { display:flex; flex-wrap:wrap; gap:12px; margin-top:24px; }
+.p1-model-card ul { padding-left:20px; line-height:1.7; }
+.p1-model-card li + li { margin-top:8px; }
+.p1-model-card .eyebrow { overflow-wrap:anywhere; }
+.p1-model-card p { overflow-wrap:anywhere; }
+
+
+.why-card .why-image-market img { transform:none; object-fit:contain; }
+.why-card .why-image-market { background:#f7f4ef; }
+.v3-source-notes { margin-top:24px; padding-top:20px; border-top:1px solid #dde5e5; color:#52666b; font-size:.875rem; line-height:1.7; overflow-wrap:anywhere; }
+.v3-source-notes p { margin:0 0 12px; }
+.v3-buyer-section { padding-block:48px; }
+.v3-buyer-section details { border-bottom:1px solid #dde5e5; padding:18px 0; }
+.v3-buyer-section summary { cursor:pointer; font-weight:600; line-height:1.5; }
+.v3-buyer-section details p { max-width:900px; margin:14px 0 0; }
+.oem-hero-copy .oem-lede { font-size:1rem; line-height:1.7; margin:0 0 14px; }

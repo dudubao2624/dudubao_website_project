@@ -266,7 +266,6 @@ const revokeAnalytics = () => {
   if (trackersWereInitialized) {
     // Trackers are already disabled; preserve only this tab's immediate draft.
     saveInquiryForConsentReload();
-    // Reload also removes automatic collectors and pending script loads.
     window.location.reload();
   }
 };
@@ -625,18 +624,47 @@ if (heroCarousel) {
   startRotation();
 }
 
+// Operational diagnostics stay in this tab. Never include form values or provider payloads.
+const inquiryLogKey = "dudubao_inquiry_log_v1";
+const recordInquiryOutcome = (entry) => {
+  const record = { ...entry, time: new Date().toISOString() };
+  console.info("DUDUBAO inquiry outcome", record);
+  try {
+    const stored = JSON.parse(window.sessionStorage.getItem(inquiryLogKey) || "[]");
+    const records = Array.isArray(stored) ? stored : [];
+    window.sessionStorage.setItem(inquiryLogKey, JSON.stringify([...records, record].slice(-20)));
+  } catch {
+    // Restricted or full storage must not interrupt submission or its confirmation.
+  }
+};
+
 if (form && statusMessage) {
+  let inquiryInFlight = false;
+
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
+    if (inquiryInFlight) {
+      return;
+    }
 
     const formData = new FormData(form);
     const submitButton = form.querySelector('button[type="submit"]');
     const controller = new AbortController();
+    const reference = `DDB-${window.crypto && typeof window.crypto.randomUUID === "function"
+      ? window.crypto.randomUUID()
+      : `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`}`;
+    const startedAt = Date.now();
+    let httpStatus = null;
+    let failureReason = "network";
+    let serviceAccepted = false;
+
+    formData.set("inquiry-reference", reference);
+    formData.set("_subject", `New DUDUBAO inquiry [${reference}]`);
+    formData.set("_url", `${window.location.origin}${window.location.pathname}`);
+
+    inquiryInFlight = true;
     const timeoutId = window.setTimeout(() => controller.abort(), requestTimeoutMs);
-
-    formData.set("_subject", `New DUDUBAO inquiry from ${formData.get("company") || formData.get("name") || "website"}`);
-    formData.set("_url", `${window.location.origin}/`);
-
+    recordInquiryOutcome({ reference, page: "oem", outcome: "attempt" });
     statusMessage.setAttribute("role", "status");
     statusMessage.textContent = "Sending your project details...";
 
@@ -647,9 +675,8 @@ if (form && statusMessage) {
 
     try {
       if (window.location.protocol === "file:") {
-        throw new Error(
-          "Email delivery requires the website to be opened through a web server, not directly as an HTML file."
-        );
+        failureReason = "local_file";
+        throw new Error("A web server is required.");
       }
 
       const response = await fetch(formSubmitEndpoint, {
@@ -662,54 +689,80 @@ if (form && statusMessage) {
         signal: controller.signal,
       });
 
-      const result = await response.json().catch(() => ({}));
+      httpStatus = response.status;
+      failureReason = response.ok ? "invalid_response" : "http";
+      const result = await response.json();
+      if (!result || typeof result !== "object" || Array.isArray(result)) {
+        throw new Error("Unexpected provider response.");
+      }
       const providerMessage = String(result.message || result.error || "");
       const providerSuccess = result.success === true || result.success === "true";
-      const providerFailure = result.success === false || result.success === "false";
       const needsActivation = /activat|confirm|verify/i.test(providerMessage);
       const needsWebServer = /web server|html files/i.test(providerMessage);
 
-      window.dudubaoLastFormSubmitResponse = {
-        status: response.status,
-        ok: response.ok,
-        result,
-      };
-
-      if (!response.ok || providerFailure || !providerSuccess || needsActivation || needsWebServer) {
-        const deliveryFailure = {
-          status: response.status,
-          result,
-        };
-        console.error("DUDUBAO contact form delivery failed", deliveryFailure);
-        console.error("DUDUBAO contact form provider response", JSON.stringify(deliveryFailure));
-        throw new Error(
-          needsActivation
-            ? "Email delivery is not activated yet. Please confirm the FormSubmit activation email for ryan@dudubao.net."
-            : needsWebServer
-              ? "Email delivery requires the website to be opened through a web server, not directly as an HTML file."
-            : providerMessage || "Unable to send your inquiry right now."
-        );
+      if (!response.ok || !providerSuccess || needsActivation || needsWebServer) {
+        if (needsActivation) {
+          failureReason = "activation";
+        } else if (needsWebServer) {
+          failureReason = "web_server";
+        } else if (response.ok) {
+          failureReason = "provider_rejected";
+        }
+        throw new Error("Provider acceptance was not confirmed.");
       }
 
-      console.info("DUDUBAO contact form accepted by email service", {
-        status: response.status,
-        result,
+      serviceAccepted = true;
+      recordInquiryOutcome({
+        reference, page: "oem", outcome: "provider_accepted",
+        httpStatus, durationMs: Date.now() - startedAt,
       });
-      trackAnalyticsEvent("form_submit_success");
-      form.reset();
-      showContactSuccess();
     } catch (error) {
-      console.error("DUDUBAO contact form submission error", error);
-      statusMessage.textContent =
-        error.name === "AbortError"
-          ? "Email delivery timed out. Please try again shortly."
-          : error.message || "Unable to send your inquiry right now. Please try again shortly.";
+      recordInquiryOutcome({
+        reference, page: "oem", outcome: "unconfirmed",
+        reason: error.name === "AbortError" ? "timeout" : failureReason,
+        httpStatus, durationMs: Date.now() - startedAt,
+      });
+      // Fixed markup only. The reference is inserted separately as plain text.
+      statusMessage.innerHTML = `
+        <span style="display:block;padding:18px;border:1px solid #dce5e7;border-radius:10px;background:#f5f9f9;color:#263e43;font-size:15px;line-height:1.55;text-align:left;overflow-wrap:anywhere">
+          <strong style="display:block;margin-bottom:8px;font-size:18px;line-height:1.3">We couldn't confirm your submission</strong>
+          <span style="display:block;margin-bottom:10px">We couldn't confirm whether your inquiry was sent. Your details are still in the form.</span>
+          <span style="display:block">Please include your reference and project details when contacting us directly. You will need to send the message yourself.</span>
+          <span style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0">
+            <a href="mailto:ryan@dudubao.net" aria-label="Email DUDUBAO at ryan@dudubao.net" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1px solid #263e43;border-radius:7px;background:#263e43;color:#fff;text-decoration:none;font-weight:700;box-sizing:border-box">ryan@dudubao.net</a>
+            <a href="https://wa.me/8619357221813" target="_blank" rel="noopener" aria-label="Contact DUDUBAO on WhatsApp at +86 193 5722 1813" style="display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:8px 16px;border:1px solid #8ca2a6;border-radius:7px;background:#fff;color:#263e43;text-decoration:none;font-weight:700;box-sizing:border-box">WhatsApp +86 193 5722 1813</a>
+          </span>
+          <span style="display:block;font-size:14px;color:#52686d">Submitting again or using another channel may create a duplicate inquiry.</span>
+        </span>
+      `;
+      const referenceNote = document.createElement("span");
+      referenceNote.style.cssText = "display:block;margin-top:10px;overflow-wrap:anywhere";
+      referenceNote.textContent = `Reference: ${reference}`;
+      statusMessage.appendChild(referenceNote);
     } finally {
       window.clearTimeout(timeoutId);
+      inquiryInFlight = false;
       if (submitButton) {
         submitButton.disabled = false;
         submitButton.textContent = "Send Project Details";
       }
+    }
+
+    if (serviceAccepted) {
+      // Optional analytics and UI errors must not reclassify a confirmed acceptance.
+      try {
+        trackAnalyticsEvent("form_submit_success");
+      } catch {
+        console.warn("DUDUBAO optional analytics unavailable");
+      }
+      const receipt = document.createElement("p");
+      receipt.style.overflowWrap = "anywhere";
+      receipt.textContent = `Reference: ${reference}. Please save this reference for follow-up.`;
+      if (contactSuccess) {
+        contactSuccess.appendChild(receipt);
+      }
+      form.reset();
+      showContactSuccess();
     }
   });
 }
