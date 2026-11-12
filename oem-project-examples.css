@@ -1,0 +1,40 @@
+.oem-project-examples { background:#f4f8f7; scroll-margin-top:112px; }
+.oem-project-examples .oem-heading>p:last-child { max-width:760px; }
+.oem-example-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.oem-example-card { min-width:0; overflow:hidden; background:#fff; border:1px solid #d9e5e3; border-radius:12px; display:flex; flex-direction:column; }
+.oem-example-card figure { margin:0; }
+.oem-example-card picture { display:flex; align-items:center; justify-content:center; height:270px; padding:20px; background:#fff; }
+.oem-example-card img { width:100%; height:100%; object-fit:contain; }
+.oem-example-card figcaption { min-height:54px; padding:12px 20px; font-size:12px; line-height:1.5; color:#5b707a; background:#f7faf9; border-top:1px solid #edf1f0; }
+.oem-example-copy { padding:24px; display:flex; flex:1; flex-direction:column; }
+.oem-example-market { color:#176f6b; font-size:14px; font-weight:750; line-height:1.6; margin:0 0 12px; }
+.oem-example-market span { display:block; font-size:12px; font-weight:500; color:#596f79; }
+.oem-example-copy h3 { margin:0 0 14px; color:#17364c; font-size:23px; line-height:1.25; letter-spacing:-.02em; }
+.oem-example-copy>p:not(.oem-example-market) { margin:0 0 22px; color:#506671; font-size:14px; line-height:1.75; }
+.oem-example-copy ul { list-style:none; display:flex; flex-wrap:wrap; gap:7px; padding:0; margin:auto 0 0; }
+.oem-example-copy li { border:1px solid #d6e6e1; border-radius:5px; padding:5px 8px; color:#2d625b; background:#f3f8f6; font-size:11px; line-height:1.5; }
+.oem-example-next { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:28px!important; }
+.oem-example-next p { color:#506671; font-size:14px; line-height:1.6; margin:0; }
+.oem-examples-entry { padding:48px 0; background:#fff; border-top:1px solid #e2ece8; border-bottom:1px solid #e2ece8; }
+.oem-examples-entry-layout { display:flex; align-items:center; justify-content:space-between; gap:40px; }
+.homepage-brand .oem-examples-entry h2 { margin:0 0 12px; color:#17364c; font-size:32px; line-height:1.2; letter-spacing:-.025em; }
+.oem-examples-entry .brand-kicker { margin-bottom:9px; }
+.oem-examples-entry p:not(.brand-kicker) { max-width:650px; margin:0; color:#506671; font-size:15px; line-height:1.7; }
+.oem-examples-entry .button { flex-shrink:0; }
+@media(max-width:1000px) { .oem-example-grid { gap:16px; } .oem-example-copy { padding:20px; } .oem-example-card picture { height:230px; padding:16px; } .oem-example-copy h3 { font-size:21px; } .oem-examples-entry-layout { gap:24px; } }
+@media(max-width:760px) { .oem-example-grid { grid-template-columns:1fr; gap:24px; } .oem-example-card picture { height:290px; } .oem-example-card figcaption { min-height:0; } .oem-example-copy { padding:24px; } .oem-example-copy h3 { font-size:24px; } .oem-example-next,.oem-examples-entry-layout { align-items:flex-start; flex-direction:column; gap:18px; } .oem-examples-entry { padding:40px 0; } .homepage-brand .oem-examples-entry h2 { font-size:29px; } .oem-project-examples { scroll-margin-top:90px; } }
+
+/* 231: round 2: Korea 3 / Lebanon 2 / Malaysia 1; precise logo pixelation. */
+.oem-example-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;align-items:start}
+.oem-example-gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-bottom:1px solid #e4ece9}
+.oem-example-gallery figure:first-child{grid-column:1/-1}
+.oem-example-gallery figure{min-width:0;border-bottom:1px solid #edf1f0}
+.oem-example-gallery figure a{display:block}
+.oem-example-gallery picture{height:185px;padding:12px}
+.oem-example-gallery figure:first-child picture{height:320px;padding:18px}
+.oem-example-gallery figcaption{font-size:11px;padding:10px 14px;min-height:54px}
+.oem-example-gallery img{object-fit:contain}
+.oem-example-gallery figure:last-child:nth-child(2){grid-column:1/-1}
+.oem-example-card:last-child .oem-example-gallery figure:first-child picture{height:320px}
+.oem-example-copy{min-height:280px}
+@media(max-width:760px){.oem-example-grid{grid-template-columns:1fr}.oem-example-gallery picture{height:160px;padding:8px}.oem-example-gallery figure:first-child picture{height:280px;padding:14px}.oem-example-gallery figcaption{min-height:66px;padding:10px}.oem-example-copy{min-height:0}}
