@@ -1,0 +1,105 @@
+/* W238 shared factory gallery, scoped to the two review sections. */
+.inside-factory {
+  padding: 72px 0;
+  background: #f3f8f7;
+  color: #17364c;
+  scroll-margin-top: 112px;
+}
+.factory-wrap {
+  width: min(1200px, calc(100% - 64px));
+  margin: 0 auto;
+}
+.inside-factory .factory-heading h2 {
+  margin: 0 0 14px;
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -.025em;
+  color: #17364c;
+}
+.factory-heading > p {
+  max-width: 720px;
+  margin: 0 0 30px;
+  color: #506671;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.factory-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.inside-factory .factory-card {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid #d9e5e3;
+  border-radius: 10px;
+  background: #fff;
+}
+.factory-image {
+  display: block;
+  background: #e9efed;
+}
+.factory-image picture {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 4 / 3;
+}
+.factory-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-height: 280px;
+  object-fit: contain;
+}
+.factory-image:focus-visible {
+  outline: 3px solid #b47c10;
+  outline-offset: -4px;
+}
+.factory-card figcaption {
+  border-top: 1px solid #e2ebe7;
+  padding: 18px 20px 20px;
+}
+.factory-stage {
+  display: block;
+  color: #176f6b;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: .025em;
+}
+.factory-card figcaption p, .factory-dispatch-pending p {
+  margin: 8px 0 0;
+  color: #506671;
+  font-size: 14px;
+  line-height: 1.65;
+}
+.factory-dispatch-pending {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
+  padding: 30px;
+  border: 1px dashed #9fbcb3;
+  border-radius: 10px;
+  background: #edf4f1;
+}
+.factory-dispatch-pending small {
+  margin-top: 14px;
+  color: #61756c;
+  font-size: 12px;
+  line-height: 1.6;
+}
+@media (max-width: 1000px) {
+  .factory-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+  .inside-factory { padding: 44px 0; scroll-margin-top: 88px; }
+  .factory-wrap { width: calc(100% - 40px); }
+  .factory-gallery { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .factory-heading > p { font-size: 15px; margin-bottom: 24px; }
+  .factory-image img { max-height: none; }
+  .factory-dispatch-pending { min-height: 180px; padding: 24px; }
+}
