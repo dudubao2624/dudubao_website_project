@@ -57,7 +57,7 @@
 .brand-tube-grid p { color:#5a7079; font-size:14px; }
 .brand-process { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); list-style:none; padding:0; gap:26px; }
 .brand-process li { border-top:2px solid #a6cec4; padding-top:18px; }
-.brand-process span { color:#428c7f; font-size:13px; font-weight:700; }
+.brand-process span { color:#2f6b60; font-size:13px; font-weight:700; }
 .brand-process h3 { font-size:17px; line-height:1.35; margin:14px 0 10px; color:var(--brand-navy); }
 .brand-process p { font-size:13px; line-height:1.7; color:#5b717b; margin:0; }
 .brand-facts { display:grid; grid-template-columns:1fr 1fr 1fr; gap:22px; margin-top:38px!important; }
