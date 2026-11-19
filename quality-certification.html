@@ -137,7 +137,7 @@
 @media(max-width:1100px){.qc-grid{grid-template-columns:1fr}.qc-steps{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.qc-steps{grid-template-columns:1fr}}
 </style>
-</head>
+<style>.qc-flow{counter-reset:qf;list-style:none;padding:0;margin:20px 0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.qc-flow li{counter-increment:qf;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:16px 16px 16px 52px;position:relative;line-height:1.45}.qc-flow li:before{content:counter(qf);position:absolute;left:16px;top:15px;width:26px;height:26px;border-radius:50%;background:#1f3a4d;color:#fff;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}.qc-flow strong{display:block;margin-bottom:4px}@media(max-width:820px){.qc-flow{grid-template-columns:1fr}}</style></head>
 <body class="buyer-page">
 <a class="buyer-skip" href="#buyer-main">Skip to content</a>
 <header class="site-header">
@@ -195,6 +195,7 @@
 <div class="buyer-wrap">
 <p class="buyer-label">In our factory</p>
 <h2>Production checkpoints</h2>
+<p class="buyer-reading">Our quality flow runs from incoming materials to shipment:</p><ol class="qc-flow"><li><strong>Incoming materials</strong>Plastic, magnets, packaging, stickers and rivets are inspected before use.</li><li><strong>Molded parts</strong>Injection-molded shells are inspected before they move to assembly.</li><li><strong>Before welding</strong>Each shell surface is checked before the magnets are put inside.</li><li><strong>After welding</strong>Tiles are checked for missing magnets and an incomplete shell after ultrasonic welding or riveting.</li><li><strong>Every 30 minutes</strong>Random inspection during assembly, before final assembly and sealing.</li><li><strong>Before shipment</strong>Random inspection of finished, packed goods before they ship.</li></ol>
 <div class="qc-steps"><figure class="qc-step"><img src="assets/inside-factory/magnet-assembly-1200.webp" alt="Magnet insertion & welding" loading="lazy" width="1200" height="800"><figcaption><strong>Magnet insertion & welding</strong>Magnets are placed and the shell is ultrasonically welded.</figcaption></figure><figure class="qc-step"><img src="assets/inside-factory/weight-check-1200.webp" alt="Component weight check" loading="lazy" width="1200" height="800"><figcaption><strong>Component weight check</strong>Bagged components are weighed against the set's component list.</figcaption></figure><figure class="qc-step"><img src="assets/inside-factory/inner-box-packing-1200.webp" alt="Inner packing" loading="lazy" width="1200" height="800"><figcaption><strong>Inner packing</strong>Components are packed by set into the retail box.</figcaption></figure><figure class="qc-step"><img src="assets/inside-factory/carton-packing-1200.webp" alt="Outer cartons" loading="lazy" width="1200" height="800"><figcaption><strong>Outer cartons</strong>Finished sets are packed into export cartons.</figcaption></figure></div>
 <p class="buyer-reading">Third-party pre-shipment inspections have been completed on our export orders, and buyer-appointed inspectors are welcome. See the full process on our <a class="buyer-link" href="factory.html">factory page</a>.</p>
 </div>
