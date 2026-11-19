@@ -32,3 +32,10 @@ if (oemSubmitButton) {
     subtree: true,
   });
 }
+
+// Prefill the model field when a product page links here with ?sku=
+(() => {
+  const skuInput = document.querySelector('input[name="requested-sku"]');
+  const sku = new URLSearchParams(window.location.search).get("sku");
+  if (skuInput && sku && /^[A-Z]\d{2}-[A-Z]$/.test(sku) && !skuInput.value) skuInput.value = sku;
+})();
