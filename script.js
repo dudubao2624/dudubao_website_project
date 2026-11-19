@@ -558,6 +558,24 @@ const knownProductSkus = new Map([
   ["C01-C", {"value": "C01-C | 99 pieces | Rainbow Car Track", "family": "Car Track Sets"}],
   ["C02-C", {"value": "C02-C | 188 pieces | Rainbow Car Track", "family": "Car Track Sets"}]
 ]);
+// Full-range models added 2026-11-19 so every catalogue "Ask about" link can prefill its model.
+const extraProductSkus = [["D03-H",{"value": "D03-H | 45 pieces | Berry, Grey & Clear Castle Tiles","family": "Magnetic Tiles"}],["D05-C",{"value": "D05-C | 30 pieces | Rainbow Hexagon & Triangle Tiles","family": "Magnetic Tiles"}],["D05-M",{"value": "D05-M | 30 pieces | Pastel Hexagon & Triangle Tiles","family": "Magnetic Tiles"}],["D08-C",{"value": "D08-C | 32 pieces | Rainbow Square Tiles","family": "Magnetic Tiles"}],["D08-M",{"value": "D08-M | 32 pieces | Pastel Square Tiles","family": "Magnetic Tiles"}],["D08-T",{"value": "D08-T | 32 pieces | Clear Square Tiles","family": "Magnetic Tiles"}],["D09-T",{"value": "D09-T | 100 pieces | Clear Magnetic Tiles","family": "Magnetic Tiles"}],["D11-C",{"value": "D11-C | 36 pieces | Rainbow Number Tile & Card Set","family": "Magnetic Tiles"}],["D12-C",{"value": "D12-C | 52 pieces | Rainbow Alphabet Tile & Card Set","family": "Magnetic Tiles"}],["D12-M",{"value": "D12-M | 52 pieces | Pastel Alphabet Tile & Card Set","family": "Magnetic Tiles"}],["D13-C",{"value": "D13-C | 21 pieces | Rainbow Linked Tiles","family": "Magnetic Tiles"}],["D13-M",{"value": "D13-M | 24 pieces | Pastel Linked Tiles","family": "Magnetic Tiles"}],["B05-C",{"value": "B05-C | 16 pieces | Rainbow Large-Stud Tiles","family": "Studded Tiles & Figures"}],["B05-M",{"value": "B05-M | 16 pieces | Pastel Large-Stud Tiles","family": "Studded Tiles & Figures"}],["B06-C",{"value": "B06-C | 16 pieces | Rainbow Small-Stud Tiles","family": "Studded Tiles & Figures"}],["B02-C",{"value": "B02-C | 4 pieces | Magnetic Figures","family": "Studded Tiles & Figures"}],["B03-C",{"value": "B03-C | 10 pieces | Magnetic Figures","family": "Studded Tiles & Figures"}],["C06-H",{"value": "C06-H | 191 pieces | Black & White Road Track Set","family": "Car Track Sets"}],["D06-T",{"value": "D06-T | 2 pieces | Clear Baseplates","family": "Accessories & Add-ons"}],["D06-J",{"value": "D06-J | 2 pieces | Berry & Teal Baseplates","family": "Accessories & Add-ons"}],["D06-H",{"value": "D06-H | 2 pieces | Baseplates","family": "Accessories & Add-ons"}],["D06-F",{"value": "D06-F | 2 pieces | Pink & Blue Baseplates","family": "Accessories & Add-ons"}],["P01-C",{"value": "P01-C | 2 pieces | Magnetic Car Bases","family": "Accessories & Add-ons"}],["P02-C",{"value": "P02-C | 3 pieces | Large-Stud Magnetic Cars","family": "Accessories & Add-ons"}],["P03-C",{"value": "P03-C | 2 pieces | Motorized Cars","family": "Accessories & Add-ons"}],["P05-C",{"value": "P05-C | 5 pieces | Light-Up Balls","family": "Accessories & Add-ons"}],["P06-C",{"value": "P06-C | 6 pieces | Rainbow Dome Tiles","family": "Accessories & Add-ons"}],["P06-T",{"value": "P06-T | 6 pieces | Clear Dome Tiles","family": "Accessories & Add-ons"}],["P07-T",{"value": "P07-T | 4 pieces | Clear Stairs","family": "Accessories & Add-ons"}],["P08-C",{"value": "P08-C | 2 pieces | Motorized Bugs","family": "Accessories & Add-ons"}],["P09-C",{"value": "P09-C | 1 piece | String Lights","family": "Accessories & Add-ons"}],["P10-C",{"value": "P10-C | 3 pieces | Maplewood Glider Cars","family": "Accessories & Add-ons"}],["P11-C",{"value": "P11-C | 2 pieces | Magnetic Eyes","family": "Accessories & Add-ons"}],["P12-C",{"value": "P12-C | 9 pieces | Magnetic Animals","family": "Accessories & Add-ons"}]];
+for (const [code, model] of extraProductSkus) knownProductSkus.set(code, model);
+const ensureOption = (select, value, label, family, beforeText) => {
+  if (!select || Array.from(select.options).some((option) => option.value === value)) return;
+  const option = document.createElement("option");
+  option.value = value;
+  option.textContent = label;
+  if (family) option.dataset.family = family;
+  const before = beforeText ? Array.from(select.options).find((o) => o.textContent.trim() === beforeText) : null;
+  select.insertBefore(option, before || null);
+};
+for (const name of ["Studded Tiles & Figures", "Accessories & Add-ons"]) {
+  ensureOption(productInterestSelect, name, name, null, "STEM Systems");
+}
+for (const [code, model] of extraProductSkus) {
+  ensureOption(requestedSkuSelect, model.value, model.value.split(" | ").join(" · "), model.family);
+}
 const syncRequestedSku = () => {
   if (!requestedSkuSelect || !requestedSkuField) return;
   const family = productInterestSelect?.value;
@@ -576,7 +594,14 @@ const preselectRequestedSku = () => {
   if (!requestedSkuSelect) return;
   const params = new URLSearchParams(window.location.search);
   const model = knownProductSkus.get(params.get("sku"));
-  if (model && params.get("product") === model.family && productInterestSelect?.value === model.family && !requestedSkuSelect.value) {
+  if (model && productInterestSelect && (!params.get("product") || params.get("product") === model.family)) {
+    productInterestSelect.value = model.family;
+  }
+  const sourcingSelect = form?.querySelector('select[name="sourcing-preference"]');
+  if (params.get("sourcing") === "oem" && sourcingSelect && !sourcingSelect.value) {
+    sourcingSelect.value = "OEM / Private Label";
+  }
+  if (model && productInterestSelect?.value === model.family && !requestedSkuSelect.value) {
     requestedSkuSelect.value = model.value;
   }
 };
