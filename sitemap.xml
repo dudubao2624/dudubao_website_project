@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.dudubaotoys.com/</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-19</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -32,7 +32,7 @@
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/oem-magnetic-tiles.html</loc>
-    <lastmod>2026-11-11</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/products/selection.html</loc>
@@ -44,6 +44,7 @@
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/quality-certification.html</loc>
+  <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/products/d01-magnetic-tiles.html</loc>
@@ -71,7 +72,7 @@
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/factory.html</loc>
-    <lastmod>2026-11-16</lastmod>
+    <lastmod>2026-11-19</lastmod>
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/packaging-artwork-guide.html</loc>
@@ -111,6 +112,10 @@
   </url>
   <url>
     <loc>https://www.dudubaotoys.com/products/full-range.html</loc>
-    <lastmod>2026-11-18</lastmod>
+    <lastmod>2026-11-19</lastmod>
+  </url>
+  <url>
+    <loc>https://www.dudubaotoys.com/magnetic-tiles-brand-positioning.html</loc>
+    <lastmod>2026-11-19</lastmod>
   </url>
 </urlset>
