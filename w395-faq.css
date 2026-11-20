@@ -1,0 +1,3 @@
+/* Buyer question navigation. */
+.w395-topics{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;margin-top:1.5rem;font-size:1rem}
+.w395-topics a{text-decoration:underline;text-underline-offset:3px}
