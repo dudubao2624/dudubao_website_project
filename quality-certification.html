@@ -21,7 +21,8 @@
 <script src="script.js?v=6b154597b6fc" defer>
 </script>
 <!-- Organization sameAs: add verified LinkedIn / YouTube / Facebook profiles here when ready. -->
-<script type="application/ld+json">{
+<script type="application/ld+json">
+{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -84,10 +85,10 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Which test reports can I request?",
+          "name": "How can I verify that a test report applies to my magnetic tile order?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "We hold EN71 and AS/NZS 8124 reports for selected models and components. Coverage is model-specific: tell us your product code and target market, and we will confirm which report applies or discuss testing for your configuration."
+            "text": "Request the complete report, including model annexes, sample photographs, results and amendments. Compare its model and component list with the proposed order, packaging revision and batch reference; ask for a written cross-reference where codes differ. Our confirmed piece counts are D01-C 102, D10-C 219, A01-T 119, A03-T 73 and C01-C 99; a matching count is only an identity check. Use the safety testing guide for the review fields. Documents are matched to SKU and destination per project."
           }
         },
         {
@@ -113,6 +114,38 @@
             "@type": "Answer",
             "text": "In-stock samples typically take about 7 days. Standard samples are normally charged, with international courier paid by the buyer. Include your selected product and delivery destination."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use the manufacturer’s reports for my own-brand CPC?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Start with a list of the documents your importer or compliance reviewer needs for the proposed own-brand product. Put your brand, exact SKU, component list and packaging revision beside the sample identity and scope in any proposed supporting report. Record gaps and who will resolve them before treating that material as a basis for your CPC; a related model name alone is insufficient. Use the safety testing guide to prepare that comparison. Documents are matched to SKU and destination per project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What evidence supports the magnetic safety of the selected set?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ask for construction photographs and test evidence tied to the actual shapes, magnets and joining process in the selected set. The product sheets describe rivet reinforcement for D01-C and D10-C, and ultrasonic sealing for D01-C, D10-C, A01-T, A03-T and C01-C. These descriptions do not establish magnet retention or a safety result; compare them with the tested components and recorded observations. Use the safety testing guide to organise the evidence review. Documents are matched to SKU and destination per project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does magnet size or strength change the safety assessment for my selected set?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Request a component-level magnet specification and the measurement method, then match each entry to the tile or accessory in your sample and any proposed test evidence. Record dimensions, material or grade, and how strength was measured as separate fields. Attraction during play cannot fill missing test data; keep unverified values open for review. Use the safety testing guide to distinguish magnet measurements from a general holding check. Documents are matched to SKU and destination per project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the age range on a report differs from my planned packaging?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Place the proposed box, instructions and warnings beside the report’s sample description and stated age scope. List each difference, identify the product version behind each document and ask your reviewer to resolve the discrepancy before finalising the artwork. Do not transfer an age statement from another SKU or treat a catalogue recommendation as the decision for this packaging. Use the safety testing guide to keep the sample and packaging references together. Documents are matched to SKU and destination per project."
+          }
         }
       ],
       "publisher": {
@@ -120,7 +153,8 @@
       }
     }
   ]
-}</script>
+}
+</script>
 <link rel="stylesheet" href="conversion-trust.css?v=a1135592aea4">
 <style>
 .qc-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:28px}
@@ -138,6 +172,7 @@
 @media(max-width:560px){.qc-steps{grid-template-columns:1fr}}
 </style>
 <style>.qc-flow{counter-reset:qf;list-style:none;padding:0;margin:20px 0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.qc-flow li{counter-increment:qf;background:#fff;border:1px solid rgba(0,0,0,.08);border-radius:12px;padding:16px 16px 16px 52px;position:relative;line-height:1.45}.qc-flow li:before{content:counter(qf);position:absolute;left:16px;top:15px;width:26px;height:26px;border-radius:50%;background:#1f3a4d;color:#fff;font-weight:700;font-size:.9rem;display:flex;align-items:center;justify-content:center}.qc-flow strong{display:block;margin-bottom:4px}@media(max-width:820px){.qc-flow{grid-template-columns:1fr}}</style><link rel="stylesheet" href="w395-faq.css?v=w400-1">
+<link rel="stylesheet" href="w424.css?v=20261121-1">
 </head>
 <body class="buyer-page">
 <a class="buyer-skip" href="#buyer-main">Skip to content</a>
@@ -145,9 +180,9 @@
 <a class="brand" href="index.html" aria-label="DUDUBAO home">
 <img src="assets/logo/logo.jpg" width="3581" height="2551" alt="DUDUBAO logo">
 </a>
-<nav class="main-nav" aria-label="Main navigation"><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html" aria-current="page">Quality &amp; Reports</a><a href="index.html#contact">Contact</a></nav>
+<nav class="main-nav" aria-label="Main navigation"><a href="factory.html">Factory</a><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="wholesale.html">Wholesale</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="quality-certification.html#inquiry">Contact</a></nav>
 <div class="header-actions">
-<a class="header-cta" href="index.html#contact">Request a Quote</a>
+<a class="header-cta" href="quality-certification.html#inquiry">Request a Quote</a>
 </div>
 <button class="mobile-menu-toggle" type="button" aria-controls="mobile-menu" aria-expanded="false" aria-label="Open navigation menu">
 <span>
@@ -157,7 +192,7 @@
 <span>
 </span>
 </button>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html" aria-current="page">Quality &amp; Reports</a><a href="index.html#contact">Contact</a><a href="wholesale.html">Wholesale &amp; stock orders</a></nav>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="factory.html">Factory</a><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="wholesale.html">Wholesale</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="quality-certification.html#inquiry">Contact</a></nav>
 </header>
 <main class="buyer-main" id="buyer-main">
 <section class="buyer-hero">
@@ -168,7 +203,7 @@
 <h1>Quality &amp; Third-Party Test Reports</h1>
 <p class="buyer-lede buyer-reading">D01-C and D10-C are listed in AS/NZS report model lists. This states only the original report model listing and tested scope. The current configuration, packaging and batch have not been matched to the tested samples. It does not establish current-set approval to the latest standards or valid certification for this batch.</p>
 <aside class="inquiry-proof-compact" aria-label="Project facts"><span>Test reports on request, matched to your SKU</span><span>Custom / private label from 500 sets per SKU</span></aside><div class="buyer-actions">
-<a class="button primary" href="index.html#contact">Request Test Reports</a>
+<a class="button primary" href="quality-certification.html#inquiry">Request Test Reports</a>
 <a class="button secondary" href="wholesale.html#classic-sets">Choose a Product</a>
 </div>
 </div>
@@ -177,8 +212,9 @@
 <div class="buyer-wrap">
 <p class="buyer-label">Test documentation</p>
 <h2>Third-party test reports</h2>
+<p>For a market-by-market document checklist and report-to-SKU review, read our <a href="magnetic-tiles-safety-testing-guide.html">magnetic tiles safety testing guide</a>.</p>
 <div class="buyer-report-grid"><article class="buyer-panel"><h3>Verified model listings</h3><p>D01-C and D10-C appear in the model lists of reports covering AS/NZS ISO 8124.1:2023, 8124.2:2023 and 8124.3:2021 test items.</p><p>This states only the original report model listing and tested scope. The current configuration, packaging and batch have not been matched to the tested samples. It does not establish current-set approval to the latest standards or valid certification for this batch.</p></article><article class="buyer-panel"><h3>Current-set evidence limits</h3><p>The verified records do not establish a complete EN71 or ASTM report package for the current versions of D01-C, D10-C, A01-T, A03-T and C01-C.</p></article><article class="buyer-panel"><h3>Your market requirements</h3><p>Tell us your destination and any retailer documentation requirements. Testing for your selected configuration can be discussed with the project.</p></article></div>
-<p class="buyer-note">Report coverage differs by model. Tell us your selected SKU and target market, and we will confirm which report applies before you order. <a class="buyer-link" href="index.html#contact">Request test reports →</a></p>
+<p class="buyer-note">Report coverage differs by model. Tell us your selected SKU and target market, and we will confirm which report applies before you order. <a class="buyer-link" href="quality-certification.html#inquiry">Request test reports →</a></p>
 </div>
 </section>
 <section class="buyer-section" id="buyer-concerns">
@@ -225,9 +261,9 @@
 <div class="buyer-wrap buyer-reading">
 <h2>Testing &amp; documentation FAQ</h2>
 <div class="buyer-faq">
-<details>
-<summary>Which test reports can I request?</summary>
-<p>We hold EN71 and AS/NZS 8124 reports for selected models and components. Coverage is model-specific: tell us your product code and target market, and we will confirm which report applies or discuss testing for your configuration.</p>
+<details id="faq-test-report" data-w393="FAQ-01">
+<summary>How can I verify that a test report applies to my magnetic tile order?</summary>
+<p>Request the complete report, including model annexes, sample photographs, results and amendments. Compare its model and component list with the proposed order, packaging revision and batch reference; ask for a written cross-reference where codes differ. Our confirmed piece counts are D01-C 102, D10-C 219, A01-T 119, A03-T 73 and C01-C 99; a matching count is only an identity check. Use the <a href="magnetic-tiles-safety-testing-guide.html">safety testing guide</a> for the review fields. Documents are matched to SKU and destination per project.</p>
 </details>
 <details>
 <summary>What should I include with my report request?</summary>
@@ -241,6 +277,22 @@
 <summary>Can I request a sample before ordering?</summary>
 <p>In-stock samples typically take about 7 days. Standard samples are normally charged, with international courier paid by the buyer. Include your selected product and delivery destination.</p>
 </details>
+<details id="faq-own-brand-cpc" data-w393="FAQ-02">
+<summary>Can I use the manufacturer’s reports for my own-brand CPC?</summary>
+<p>Start with a list of the documents your importer or compliance reviewer needs for the proposed own-brand product. Put your brand, exact SKU, component list and packaging revision beside the sample identity and scope in any proposed supporting report. Record gaps and who will resolve them before treating that material as a basis for your CPC; a related model name alone is insufficient. Use the <a href="magnetic-tiles-safety-testing-guide.html">safety testing guide</a> to prepare that comparison. Documents are matched to SKU and destination per project.</p>
+</details>
+<details id="faq-magnetic-safety" data-w393="FAQ-06">
+<summary>What evidence supports the magnetic safety of the selected set?</summary>
+<p>Ask for construction photographs and test evidence tied to the actual shapes, magnets and joining process in the selected set. The product sheets describe rivet reinforcement for D01-C and D10-C, and ultrasonic sealing for D01-C, D10-C, A01-T, A03-T and C01-C. These descriptions do not establish magnet retention or a safety result; compare them with the tested components and recorded observations. Use the <a href="magnetic-tiles-safety-testing-guide.html">safety testing guide</a> to organise the evidence review. Documents are matched to SKU and destination per project.</p>
+</details>
+<details id="faq-magnet-specifications" data-w393="FAQ-07">
+<summary>Does magnet size or strength change the safety assessment for my selected set?</summary>
+<p>Request a component-level magnet specification and the measurement method, then match each entry to the tile or accessory in your sample and any proposed test evidence. Record dimensions, material or grade, and how strength was measured as separate fields. Attraction during play cannot fill missing test data; keep unverified values open for review. Use the <a href="magnetic-tiles-safety-testing-guide.html">safety testing guide</a> to distinguish magnet measurements from a general holding check. Documents are matched to SKU and destination per project.</p>
+</details>
+<details id="faq-age-label" data-w393="FAQ-08">
+<summary>What if the age range on a report differs from my planned packaging?</summary>
+<p>Place the proposed box, instructions and warnings beside the report’s sample description and stated age scope. List each difference, identify the product version behind each document and ask your reviewer to resolve the discrepancy before finalising the artwork. Do not transfer an age statement from another SKU or treat a catalogue recommendation as the decision for this packaging. Use the <a href="magnetic-tiles-safety-testing-guide.html">safety testing guide</a> to keep the sample and packaging references together. Documents are matched to SKU and destination per project.</p>
+</details>
 </div>
 </div>
 </section>
@@ -250,8 +302,122 @@
 <h2>Ask about your product and market</h2>
 <p>Send your product code and destination to request test reports.</p>
 </div>
-<aside class="inquiry-proof-compact" aria-label="Project facts"><span>Test reports on request, matched to your SKU</span><span>Custom / private label from 500 sets per SKU</span></aside><a class="button primary" href="index.html#contact">Request Test Reports</a>
+<aside class="inquiry-proof-compact" aria-label="Project facts"><span>Test reports on request, matched to your SKU</span><span>Custom / private label from 500 sets per SKU</span></aside><a class="button primary" href="quality-certification.html#inquiry">Request Test Reports</a>
 </div>
+</section>
+
+<section class="section contact-section local-inquiry" id="inquiry" aria-labelledby="inquiry-title">
+  <div class="container local-inquiry-heading"><p class="eyebrow">Discuss your project</p><h2 id="inquiry-title">Discuss your product and document needs</h2><p>Share the selected SKU, destination and the questions raised by your buyer or reviewer.</p></div>
+  <div class="container contact-layout" data-contact-layout>
+    <div class="success-card" data-contact-success role="status" aria-live="polite" hidden>
+            <div class="success-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M9.2 16.6 4.95 12.35l1.42-1.42 2.83 2.83 8.43-8.43 1.42 1.42L9.2 16.6Z"/>
+              </svg>
+            </div>
+            <h2>Thank you!</h2>
+            <p>
+              Your inquiry has been accepted by our email service.
+            </p>
+            <p>
+              Our team will review your information and contact you shortly with relevant product suggestions.
+            </p>
+            <p>
+              Full catalog and detailed materials will be shared after project discussion.
+            </p>
+            <div class="success-actions">
+              <a class="button success-secondary" href="play-system.html">Explore play systems</a>
+              <a
+                class="button success-whatsapp"
+                href="https://wa.me/8619357221813"
+                target="_blank"
+                rel="noopener"
+              >Chat on WhatsApp</a><a class="button success-secondary" href="mailto:ryan@dudubao.net?subject=DUDUBAO%20catalog%20request">Request the catalog by email</a>
+            </div>
+          </div>
+    <div class="inquiry-entry"><p class="local-inquiry-trust">DUDUBAO-branded stock is subject to actual inventory. Review <a href="moq-samples-guide.html">MOQ</a>, <a href="moq-samples-guide.html">samples</a> and <a href="moq-samples-guide.html">production lead times</a> in our sourcing guide.</p><form
+            class="contact-form"
+            id="contact-form"
+            action="https://formsubmit.co/ryan@dudubao.net"
+            method="POST"
+            data-placeholder-form
+            data-clarity-mask="true"
+          >
+            <input type="hidden" name="_subject" value="New DUDUBAO website inquiry">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="text" name="_honey" tabindex="-1" autocomplete="off" hidden>
+            <label>
+              Name
+              <input type="text" name="name" placeholder="Your name" autocomplete="name" required>
+            </label>
+            <label>
+              Company
+              <input type="text" name="company" placeholder="Company name" autocomplete="organization" required>
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" placeholder="name@company.com" autocomplete="email" required>
+            </label>
+            <label>
+              WhatsApp / Phone
+              <input type="tel" name="phone" placeholder="+1 555 000 0000" autocomplete="tel">
+            </label>
+            <label>
+              Country / Region
+              <input type="text" name="country" placeholder="Country / region" autocomplete="country-name">
+            </label>
+            <label>
+              Business Type
+              <select name="business-type" required>
+                <option value="">Select business type</option>
+                <option>Brand Owner</option>
+                <option>Distributor / Wholesaler</option>
+                <option>Retailer</option>
+                <option>Education / STEM</option>
+                <option>Other</option>
+              </select>
+            </label>
+            <label>
+              Product Interest
+              <select name="product-interest" required><option value="">Select product interest</option><option>Magnetic Tiles</option><option>Music Magnetic Systems</option><option>Ball Runs &amp; Motion</option><option>Mini Magnetic Tiles</option><option>Car Track Sets</option><option>Construction Vehicle Sets</option><option>Themed Magnetic Tile Sets</option><option>STEM Systems</option><option>Private Label / ODM</option><option>Other</option></select>
+            </label>
+            <div data-requested-sku-field hidden>
+              <label>
+                Model / SKU (optional)
+                <select name="requested-sku" disabled><option value="">No specific SKU / discuss options</option><option value="D01-C | 102 pieces | Rainbow" data-family="Magnetic Tiles">D01-C · 102 pieces · Rainbow</option><option value="D10-C | 219 pieces | Rainbow" data-family="Magnetic Tiles">D10-C · 219 pieces · Rainbow</option><option value="D01-M | 102 pieces | Pastel" data-family="Magnetic Tiles">D01-M · 102 pieces · Pastel</option><option value="D15-C | 113 pieces | Christmas Tree" data-family="Themed Magnetic Tile Sets">D15-C · 113 pieces · Christmas Tree</option><option value="B07-C | 101 pieces | Construction Vehicle" data-family="Construction Vehicle Sets">B07-C · 101 pieces · Construction Vehicle</option><option value="A01-C | 119 pieces | Color Tubes" data-family="Ball Runs &amp; Motion">A01-C · 119 pieces · Color Tubes</option><option value="A01-T | 119 pieces | Clear Tubes" data-family="Ball Runs &amp; Motion">A01-T · 119 pieces · Clear Tubes</option><option value="A03-T | 73 pieces | Bell Ball Run" data-family="Music Magnetic Systems">A03-T · 73 pieces · Bell Ball Run</option><option value="A05-C | 10 pieces | Bell Expansion Pack" data-family="Music Magnetic Systems">A05-C · 10 pieces · Bell Expansion Pack</option><option value="M01-C | 28 pieces | Glitter" data-family="Mini Magnetic Tiles">M01-C · 28 pieces · Glitter</option><option value="M02-C | 70 pieces | Rainbow" data-family="Mini Magnetic Tiles">M02-C · 70 pieces · Rainbow</option><option value="M02-M | 72 pieces | Pastel" data-family="Mini Magnetic Tiles">M02-M · 72 pieces · Pastel</option><option value="D10-M | 226 pieces | Pastel" data-family="Magnetic Tiles">D10-M · 226 pieces · Pastel</option><option value="C01-C | 99 pieces | Rainbow Car Track" data-family="Car Track Sets">C01-C · 99 pieces · Rainbow Car Track</option><option value="C02-C | 188 pieces | Rainbow Car Track" data-family="Car Track Sets">C02-C · 188 pieces · Rainbow Car Track</option></select>
+              </label>
+            </div>
+            <label>
+              Sourcing Preference (optional)
+              <select name="sourcing-preference">
+                <option value="">Select if known</option>
+                <option>DUDUBAO Branded Products</option>
+                <option>OEM / Private Label</option>
+                <option>Not Sure Yet</option>
+              </select>
+            </label>
+            <label>
+              Estimated Order Quantity (sets)
+              <select name="estimated-quantity">
+                <option value="">Select estimated quantity</option>
+                <option>Small order of available DUDUBAO-branded stock — subject to confirmation</option>
+                <option>500–1,000 sets</option>
+                <option>1,000–5,000 sets</option>
+                <option>5,000+ sets</option>
+                <option>Not sure yet</option>
+              </select>
+            </label>
+            <label>
+              Project Details
+              <textarea name="message" rows="5" placeholder="Tell us about your product idea, target market, timeline, packaging, or private label needs"></textarea>
+            </label>
+            <button class="button primary" type="submit">Send Project Details</button>
+            <p class="form-note" data-form-status role="status" aria-live="polite">
+              Custom and private-label orders: 500 sets per SKU, subject to project confirmation.
+            </p>
+          </form></div>
+  </div>
 </section>
 </main>
 <footer class="buyer-footer">
