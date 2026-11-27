@@ -16,7 +16,7 @@
 .local-inquiry .success-actions { flex-wrap:wrap; }
 .local-inquiry .success-secondary { color:#126f6b; background:#fff; border:1px solid #98bdb8; }
 .local-inquiry .success-whatsapp { color:#fff; background:#187571; }
-@media (max-width:1200px) and (min-width:769px) {
+@media (max-width:1280px) and (min-width:769px) {
   .site-header { grid-template-columns:150px minmax(0,1fr) auto; gap:8px 22px; min-height:104px; padding-block:7px; }
   .site-header .brand { grid-column:1; grid-row:1; }
   .site-header .header-actions { grid-column:3; grid-row:1; }
@@ -27,4 +27,9 @@
   .local-inquiry-heading { width:calc(100% - 40px); }
   .local-inquiry .contact-form { padding:24px 18px; }
   .local-inquiry .success-actions { flex-direction:column; }
+}
+
+/* Keep the additional resource destination within the desktop header. */
+@media (min-width:1281px) {
+  .site-header .main-nav { gap:clamp(10px,1vw,16px); }
 }

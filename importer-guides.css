@@ -1,0 +1,16 @@
+/* Importer guides reuse the site's buyer article template. */
+.importer-guide-page .buyer-label{font-size:.875rem!important}
+.importer-guide-page .buyer-breadcrumb{font-size:.875rem}
+.importer-guide-page .buyer-section[id]{scroll-margin-top:110px}
+.importer-toc{display:flex;flex-wrap:wrap;gap:12px 24px;padding-top:20px;padding-bottom:24px;border-top:1px solid #ccd9e4;font-size:.9375rem;line-height:1.6}
+.importer-toc a,.importer-guide-page .guide-reading p a,.importer-guide-page .guide-reading li a{text-decoration:underline;text-underline-offset:4px}
+.importer-checklist{padding-left:24px}
+.importer-matrix table{min-width:800px;font-size:1rem}
+.importer-matrix th:first-child{width:23%}
+.importer-matrix th:last-child{width:24%}
+.importer-matrix th,.importer-matrix td{padding:18px 14px;line-height:1.65}
+.importer-matrix:focus-visible{outline:3px solid #28629d;outline-offset:5px}
+.importer-guide-page .guide-confirm{margin:24px 0}
+.importer-guide-page .guide-confirm p{margin:0}
+@media(max-width:760px){.importer-toc{gap:12px 20px}.importer-guide-page .buyer-section[id]{scroll-margin-top:90px}.importer-matrix table{font-size:.9375rem}.importer-matrix th,.importer-matrix td{padding:14px 12px}}
+@media print{.importer-guide-page .site-header,.importer-guide-page .mobile-contact-bar,.importer-guide-page .buyer-footer,.importer-guide-page .buyer-actions,.importer-toc{display:none}.importer-guide-page .buyer-section{padding:20px 0}.importer-matrix{overflow:visible}.importer-matrix table{min-width:0;font-size:.75rem}.importer-matrix th,.importer-matrix td{padding:8px}.importer-guide-page details{break-inside:avoid}}

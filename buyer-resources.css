@@ -1,0 +1,97 @@
+/* Buyer task index. Shared header rules remain in w424.css. */
+.resources-page { background:#fff; }
+.resources-page .buyer-wrap { width:min(1180px,calc(100% - 64px)); }
+.resources-page h1 { margin:14px 0 22px; color:#183e42; font-size:clamp(42px,5.2vw,66px); line-height:1.08; letter-spacing:-.035em; }
+.resources-page h2 { margin:0 0 18px; color:#183e42; font-size:clamp(28px,3.2vw,38px); line-height:1.2; letter-spacing:-.025em; }
+.resources-page h3,.resources-page h4 { color:#183e42; line-height:1.35; }
+.resources-page p { line-height:1.7; }
+.resources-hero { padding:40px 0 54px; background:#f2f7f4; border-bottom:1px solid #dce8e2; }
+.resources-hero-grid { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:68px; align-items:center; }
+.resources-hero .buyer-breadcrumb { margin-bottom:34px; }
+.resources-hero .buyer-lede { max-width:680px; color:#4b6265; font-size:19px; }
+.resources-reviewed { margin:24px 0 0; color:#526c65; font-size:13px; }
+.resources-start { padding:30px; border:1px solid #cfdfd4; border-top:4px solid #287a69; border-radius:4px 4px 18px 18px; background:#fff; }
+.resources-start h2 { font-size:25px; }
+.resources-start ol { margin:20px 0 24px; padding-left:22px; color:#4b6265; }
+.resources-start li { padding:4px 0 6px 6px; }
+.resources-tasks { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; padding-top:24px; padding-bottom:24px; }
+.resources-tasks a { display:flex; align-items:center; gap:12px; padding:14px 18px; background:#fff; border:1px solid #d7e3df; border-radius:8px; color:#234f4c; font-size:14px; font-weight:700; }
+.resources-tasks span { color:#527b6b; font-size:12px; }
+.resources-tasks a:hover { background:#eef7f1; border-color:#287a69; }
+.resources-section { padding:64px 0; scroll-margin-top:130px; }
+.resources-tint { background:#f6f8f6; border-block:1px solid #e2e9e4; }
+.resources-intro { max-width:850px; margin:0 0 24px; color:#52656a; }
+.resources-grid { display:grid; gap:20px; }
+.resources-grid-three { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.resources-grid-four { grid-template-columns:repeat(4,minmax(0,1fr)); }
+.resources-grid-two { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.resource-card { min-width:0; padding:25px; border:1px solid #d9e5df; border-radius:12px; background:#fff; display:flex; flex-direction:column; align-items:flex-start; }
+.resource-card h3,.resource-card h4 { margin:0 0 14px; font-size:20px; }
+.resource-card p { margin:0 0 20px; color:#52656a; font-size:15px; }
+.resource-card > .buyer-link { margin-top:auto; }
+.resources-page .buyer-link { color:#17695e; text-decoration:underline; text-underline-offset:4px; font-size:14px; }
+.resource-card h3 a:hover,.resource-card h4 a:hover,.resources-guide-list a:hover { text-decoration:underline; text-underline-offset:4px; }
+.resources-note { max-width:930px; color:#52656a; font-size:13px; }
+.resources-downloads { margin-top:26px; display:grid; gap:14px; }
+.resource-download { display:grid; grid-template-columns:52px minmax(0,1fr) auto; align-items:center; gap:24px; padding:25px 28px; border:1px solid #d4e3da; border-radius:12px; background:#fff; }
+.resource-file-mark { align-self:start; display:grid; place-items:center; width:48px; height:60px; border:1px solid #8cad9f; border-radius:4px 12px 4px 4px; background:#f0f6f2; color:#216953; font-size:12px; font-weight:800; letter-spacing:.08em; }
+.resource-download .resource-model { margin:0 0 5px; color:#17695e; font-size:13px; font-weight:750; }
+.resource-download h3 { margin:0 0 9px; font-size:22px; }
+.resource-meta { color:#52656a; font-size:13px; }
+.resource-download .resource-meta { max-width:650px; margin:0; }
+.resource-download .resources-note { margin:8px 0 0; }
+.resource-download-actions { display:flex; flex-direction:column; align-items:center; gap:12px; }
+.resource-download-actions .button { min-height:44px; padding:12px 18px; font-size:14px; white-space:nowrap; }
+.resource-group-title { margin:38px 0 20px; font-size:24px; }
+.resource-guide { padding:23px; }
+.resource-guide h4 { font-size:19px; }
+.resource-card .resource-format { margin:0 0 14px; color:#65796f; text-transform:uppercase; font-size:11px; font-weight:750; letter-spacing:.08em; }
+.resources-guide-list { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:0 32px; margin:0; padding:0; list-style:none; }
+.resources-guide-list li { min-width:0; padding:20px 0; border-bottom:1px solid #dce7e0; }
+.resources-guide-list h4 { margin:0 0 8px; font-size:17px; }
+.resources-guide-list p { margin:0; color:#52656a; font-size:14px; }
+.resource-tool h4 { font-size:21px; }
+.resources-scope { max-width:900px; margin:0 0 28px; padding:20px 24px; border-left:3px solid #287a69; color:#284f47; background:#ebf2ed; }
+.resources-faq-grid { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.7fr); gap:64px; }
+.resources-faq-grid > div > p:not(.buyer-label) { color:#52656a; }
+.resources-page .buyer-faq { margin:0; }
+.resources-page .buyer-faq details { background:#fff; }
+.resources-inquiry { background:#ebf3ed; border-top:1px solid #d6e3d9; }
+.resources-inquiry-grid { display:grid; grid-template-columns:minmax(0,1.5fr) minmax(0,1fr); gap:90px; align-items:center; }
+.resources-inquiry-grid p { max-width:680px; color:#4b6265; }
+.resources-inquiry-grid aside { padding-left:30px; border-left:1px solid #bdd1c3; color:#4b6265; }
+.resources-inquiry-grid h3 { margin-top:0; }
+.resources-inquiry-grid li { margin:10px 0; }
+.resources-page a:focus-visible,.resources-page summary:focus-visible { outline:3px solid #287a69; outline-offset:4px; border-radius:3px; }
+@media (max-width:1000px) {
+ .resources-hero-grid { gap:32px; }
+ .resources-grid-four { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .resources-tasks a { font-size:13px; padding:12px; }
+ .resources-faq-grid,.resources-inquiry-grid { gap:32px; }
+ .resource-download { gap:18px; padding:22px; }
+}
+@media (max-width:768px) {
+ .resources-page .buyer-wrap { width:calc(100% - 36px); }
+ .resources-hero { padding:25px 0 36px; }
+ .resources-hero-grid,.resources-faq-grid,.resources-inquiry-grid { grid-template-columns:1fr; gap:28px; }
+ .resources-hero .buyer-breadcrumb { margin-bottom:24px; }
+ .resources-start { padding:24px; }
+ .resources-section { padding:42px 0; scroll-margin-top:90px; }
+ .resources-tasks { grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+ .resources-tasks a { align-items:flex-start; line-height:1.4; }
+ .resources-tasks span { padding-top:2px; }
+ .resources-grid-three,.resources-grid-two { grid-template-columns:1fr; }
+ .resources-guide-list { grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 20px; }
+ .resource-download { grid-template-columns:40px minmax(0,1fr); gap:16px; padding:22px 18px; }
+ .resource-file-mark { width:38px; height:49px; font-size:10px; }
+ .resource-download-actions { grid-column:2; align-items:flex-start; }
+ .resource-download-actions .button { white-space:normal; }
+ .resource-card { padding:22px; }
+ .resources-inquiry-grid aside { padding-left:22px; }
+}
+@media (max-width:480px) {
+ .resources-grid-four,.resources-guide-list { grid-template-columns:1fr; }
+ .resources-tasks a { padding:12px 10px; gap:8px; }
+ .resources-hero .buyer-actions { flex-direction:column; align-items:stretch; }
+ .resources-hero .buyer-actions .button { text-align:center; }
+}
