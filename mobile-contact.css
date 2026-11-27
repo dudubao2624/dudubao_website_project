@@ -1,0 +1,62 @@
+/* W549: shared static contact bar; desktop layout stays unchanged. */
+.mobile-contact-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  html {
+    scroll-padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+
+  body {
+    padding-bottom: calc(84px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .floating-contact {
+    display: none !important;
+  }
+
+  body > .mobile-contact-bar {
+    position: fixed;
+    inset: auto 0 0;
+    z-index: 90;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    box-sizing: border-box;
+    padding: 8px max(12px, env(safe-area-inset-right, 0px))
+      calc(8px + env(safe-area-inset-bottom, 0px))
+      max(12px, env(safe-area-inset-left, 0px));
+    border-top: 1px solid #dce5e7;
+    background: #fff;
+    box-shadow: 0 -4px 18px rgba(38, 62, 67, 0.1);
+  }
+
+  .mobile-contact-bar > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 10px 8px;
+    box-sizing: border-box;
+    border: 1px solid #245c58;
+    border-radius: 8px;
+    color: #245c58;
+    background: #fff;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .mobile-contact-bar > .mobile-contact-inquiry {
+    color: #fff;
+    background: #245c58;
+  }
+
+  .mobile-contact-bar > a:focus-visible {
+    outline: 3px solid #1684d8;
+    outline-offset: 2px;
+  }
+}

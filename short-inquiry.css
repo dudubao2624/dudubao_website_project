@@ -1,0 +1,71 @@
+/* Shared layout for the five-field inquiry and native optional disclosure. */
+.contact-form[data-short-inquiry] {
+  min-width: 0;
+}
+.short-inquiry-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  min-width: 0;
+}
+.short-inquiry-fields > *,
+.short-inquiry-fields label {
+  min-width: 0;
+}
+.short-inquiry-fields label {
+  display: grid;
+  gap: 7px;
+  color: #33425a;
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+.short-inquiry-main > label:last-child,
+.short-inquiry-extra > fieldset,
+.short-inquiry-extra > .oem-full {
+  grid-column: 1 / -1;
+}
+.short-inquiry-details {
+  min-width: 0;
+  margin: 14px 0 0;
+  border-top: 1px solid #c6d6e1;
+  border-bottom: 1px solid #c6d6e1;
+}
+.short-inquiry-details > summary {
+  padding: 15px 0;
+  color: #33425a;
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.short-inquiry-details > summary:focus-visible {
+  outline: 3px solid #175991;
+  outline-offset: 3px;
+}
+.short-inquiry-extra {
+  padding: 3px 0 18px;
+}
+.contact-form[data-short-inquiry] .short-inquiry-fields input,
+.contact-form[data-short-inquiry] .short-inquiry-fields select,
+.contact-form[data-short-inquiry] .short-inquiry-fields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  font-size: 16px;
+}
+.contact-form[data-short-inquiry] .short-inquiry-fields select {
+  padding-right: 30px;
+}
+.contact-form[data-short-inquiry] .short-inquiry-main textarea {
+  min-height: 88px;
+}
+@media (max-width: 640px) {
+  .short-inquiry-fields {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+  .contact-form[data-short-inquiry] {
+    padding: 18px;
+    gap: 12px;
+  }
+}
