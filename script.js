@@ -578,12 +578,14 @@ for (const [code, model] of extraProductSkus) {
 }
 const syncRequestedSku = () => {
   if (!requestedSkuSelect || !requestedSkuField) return;
+  // The short inquiry starts with a model choice, before optional project details.
+  const shortInquiry = form.hasAttribute("data-short-inquiry");
   const family = productInterestSelect?.value;
-  const hasModels = Array.from(knownProductSkus.values()).some((model) => model.family === family);
+  const hasModels = shortInquiry || Array.from(knownProductSkus.values()).some((model) => model.family === family);
   requestedSkuField.hidden = !hasModels;
   requestedSkuSelect.disabled = !hasModels;
   for (const option of requestedSkuSelect.options) {
-    const matches = !option.value || option.dataset.family === family;
+    const matches = shortInquiry || !option.value || option.dataset.family === family;
     option.hidden = !matches;
     option.disabled = !matches;
   }
@@ -601,7 +603,7 @@ const preselectRequestedSku = () => {
   if (params.get("sourcing") === "oem" && sourcingSelect && !sourcingSelect.value) {
     sourcingSelect.value = "OEM / Private Label";
   }
-  if (model && productInterestSelect?.value === model.family && !requestedSkuSelect.value) {
+  if (model && productInterestSelect?.value === model.family) {
     requestedSkuSelect.value = model.value;
   }
 };
@@ -612,6 +614,11 @@ preselectRequestedSku();
 restoreInquiryAfterConsentReload();
 syncRequestedSku();
 productInterestSelect?.addEventListener("change", syncRequestedSku);
+requestedSkuSelect?.addEventListener("change", () => {
+  if (!form.hasAttribute("data-short-inquiry") || !productInterestSelect) return;
+  const family = requestedSkuSelect.selectedOptions[0]?.dataset.family;
+  if (family) productInterestSelect.value = family;
+});
 form?.addEventListener("reset", () => window.setTimeout(syncRequestedSku, 0));
 setupAnalyticsConsent();
 
@@ -633,6 +640,23 @@ document.addEventListener("click", (event) => {
     trackAnalyticsEvent("product_inquiry_click", {
       product_family: contactLink.dataset.productFamily,
     });
+  }
+
+  // Apply explicit model links even when the form is already on this page.
+  const inquiryUrl = new URL(contactLink.href);
+  if (!event.defaultPrevented && event.button === 0 &&
+      !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey &&
+      inquiryUrl.origin === window.location.origin &&
+      inquiryUrl.pathname === window.location.pathname && inquiryUrl.hash === "#inquiry") {
+    const model = knownProductSkus.get(inquiryUrl.searchParams.get("sku"));
+    if (model && productInterestSelect && requestedSkuSelect && requestedSkuField) {
+      productInterestSelect.value = model.family;
+      syncRequestedSku();
+      requestedSkuSelect.value = model.value;
+      event.preventDefault();
+      window.history.replaceState(null, "", inquiryUrl.search + inquiryUrl.hash);
+      document.getElementById("inquiry")?.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   const href = (contactLink.getAttribute("href") || "").trim();
