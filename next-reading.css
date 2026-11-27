@@ -1,0 +1,117 @@
+/* Shared, static next-reading module. All styles are scoped to this section. */
+.next-reading {
+  padding: 40px 0 48px;
+  border-top: 1px solid #d4e2ed;
+  background: #f0f5f8;
+  color: #172b45;
+  scroll-margin-top: 120px;
+}
+.next-reading .next-reading-wrap {
+  width: min(1180px, calc(100% - 64px));
+  margin: 0 auto;
+}
+.next-reading .next-reading-stage {
+  margin: 0 0 8px;
+  color: #175991;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.next-reading .next-reading-title {
+  margin: 0 0 12px;
+  font-size: clamp(26px, 2.5vw, 32px);
+  line-height: 1.2;
+  letter-spacing: -.02em;
+}
+.next-reading .next-reading-intro {
+  max-width: 800px;
+  margin: 0 0 24px;
+  color: #4b5b6d;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.next-reading .next-reading-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.next-reading .next-reading-item {
+  display: flex;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+.next-reading .next-reading-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 22px;
+  border: 1px solid #c9d9e5;
+  border-radius: 12px;
+  background: #fff;
+  color: #172b45;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.next-reading .next-reading-card:hover {
+  border-color: #175991;
+  background: #f9fcff;
+}
+.next-reading .next-reading-card:focus-visible {
+  outline: 3px solid #175991;
+  outline-offset: 4px;
+}
+.next-reading .next-reading-card-stage {
+  margin-bottom: 10px;
+  color: #4b5b6d;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.next-reading .next-reading-card-title {
+  margin: 0 0 12px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: normal;
+}
+.next-reading .next-reading-card-description {
+  margin: 0 0 20px;
+  color: #4b5b6d;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.next-reading .next-reading-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: auto;
+  color: #175991;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 800px) {
+  .next-reading { padding: 32px 0 40px; scroll-margin-top: 90px; }
+  .next-reading .next-reading-wrap { width: calc(100% - 36px); }
+  .next-reading .next-reading-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .next-reading .next-reading-card { padding: 20px; }
+  .next-reading .next-reading-card-description { margin-bottom: 16px; }
+}
+@media (forced-colors: active) {
+  .next-reading .next-reading-card { border-color: LinkText; }
+  .next-reading .next-reading-card:focus-visible { outline-color: Highlight; }
+}
+@media print {
+  .next-reading { padding: 24px 0; background: #fff; }
+  .next-reading .next-reading-wrap { width: 100%; }
+  .next-reading .next-reading-grid { display: block; }
+  .next-reading .next-reading-item { margin-top: 12px; break-inside: avoid; }
+}

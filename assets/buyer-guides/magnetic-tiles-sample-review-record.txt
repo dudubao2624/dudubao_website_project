@@ -1,0 +1,66 @@
+MAGNETIC TILES SAMPLE REVIEW RECORD
+Buyer working template. Use one record per sample and revision.
+
+SAMPLE HEADER
+SKU / model:
+Configuration / color version:
+Sample ID:
+Date received:
+Reviewer:
+Target market:
+Decision the sample should support:
+Agreed physical sample scope:
+Elements to review as files:
+Elements outside this sample's scope:
+Contents-list revision:
+Artwork / box revision:
+Instruction / language revision:
+Proposed quantity per intended order line:
+Preparation starting point (project-confirmed):
+Planned sample readiness date (project-confirmed):
+Transit planning entry:
+Buyer review date:
+
+INDEPENDENT REVIEW STATUS
+Product: Unconfirmed
+Packaging and instructions: Unconfirmed
+Documentation: Unconfirmed
+
+CONTENTS AND ACTIVITY REVIEW
+Component groups counted / quantities:
+Items not examined:
+Build or route / instruction step:
+Selected ball or LED track car, if applicable:
+Confirmed setup reference, if applicable:
+Components / supports used:
+Additional packs or parts used:
+Observed result:
+Photo references:
+
+FINDING ENTRY (copy for each finding)
+Finding ID:
+Affected component / panel / instruction step:
+Expected reference and revision:
+Observation:
+Photo or file reference:
+Requested change or clarification:
+Action owner:
+Due date:
+Approval scope affected:
+Status: Open
+Response / revised reference:
+Closure evidence:
+Review result / reviewer / date:
+
+FINAL REVIEW DECISIONS
+Product decision / scope / reference / reviewer / date:
+Packaging and instructions decision / scope / reference / reviewer / date:
+Documentation decision / scope / reference / reviewer / date:
+Remaining holds and next actions:
+Revised sample or file review needed:
+Next sample ID / revision:
+Final sample and order-detail confirmation reference, when applicable:
+
+This record tracks buyer decisions for a defined sample. It does not replace
+test documentation or the agreed order inspection plan. Keep photo and file
+references with the record. Preserve earlier reviews and mark the current one.

@@ -21,8 +21,7 @@
 <script src="script.js?v=b2-1" defer>
 </script>
 <!-- Organization sameAs: add verified LinkedIn / YouTube / Facebook profiles here when ready. -->
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
     {
@@ -88,18 +87,18 @@
       "mainEntity": [
         {
           "@type": "Question",
-          "name": "Can I order DUDUBAO stock or private label?",
+          "name": "Can I order small quantities of DUDUBAO-branded stock?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "For DUDUBAO-branded stock, small orders are supported subject to actual inventory. Custom and private-label orders start at 500 sets per SKU. "
+            "text": "For DUDUBAO-branded stock, we will check inventory and order feasibility for your proposed assortment. Please share the selected SKUs and quantities per SKU."
           }
         },
         {
           "@type": "Question",
-          "name": "Can I mix colors or SKUs?",
+          "name": "Can quantities from different SKUs be combined to meet the MOQ?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "List quantity per SKU and colorway. Mixed-SKU requests are reviewed separately; 500 sets in total does not automatically qualify for mixed-SKU production."
+            "text": "For custom and private-label magnetic tile orders, the minimum is 500 sets per SKU. This applies separately to each SKU. Quantities from different SKUs cannot be combined to meet the minimum."
           }
         },
         {
@@ -124,6 +123,30 @@
           "acceptedAnswer": {
             "@type": "Answer",
             "text": "Start with the exact stock SKU and configuration you plan to order. Use the safety testing guide to compare the sample identity, component list and destination requirements before relying on a document. Documents are matched to SKU and destination per project."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What retail-box dimensions are recorded for the five main sets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recorded retail-box dimensions are D01-C: 322 × 240 × 73 mm; D10-C: 510 × 330 × 100 mm; A01-T: 484 × 410 × 105 mm; A03-T: 370 × 330 × 90 mm; C01-C: 320 × 270 × 74 mm. These are reference values, not current-batch measurements. Confirm the sample and corresponding packaging."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What single-box weights are recorded for the five main sets?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Recorded single-box weights are D01-C: 3.25 kg; D10-C: 8 kg; A01-T: 3.25 kg; A03-T: 1.89 kg; C01-C: 2.2 kg. These are box-weight references, not single-set net weights or current-batch measurements. Confirm the sample and corresponding packaging."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are the packing references a packing list for our current shipment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Packing data are reference values from product records, not measurements of the current batch. Confirm the sample, corresponding packaging and final packing details for your order."
           }
         }
       ],
@@ -170,15 +193,15 @@
       ]
     }
   ]
-}
-</script>
+}</script>
 <link rel="stylesheet" href="play-system.css?v=9b7e77e98306">
 <link rel="stylesheet" href="conversion-trust.css?v=a1135592aea4">
 <link rel="stylesheet" href="w395-faq.css?v=w400-1">
 <link rel="describedby" href="llms.txt" type="text/plain">
-<link rel="stylesheet" href="w424.css?v=20261121-1">
+<link rel="stylesheet" href="w424.css?v=w576-1">
 <link rel="stylesheet" href="mobile-contact.css?v=w549-1">
 <link rel="stylesheet" href="short-inquiry.css?v=w555-1">
+<link rel="stylesheet" href="next-reading.css?v=w580-1">
 </head>
 <body class="buyer-page">
 <a class="buyer-skip" href="#buyer-main">Skip to content</a>
@@ -198,7 +221,7 @@
 <span>
 </span>
 </button>
-<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="factory.html">Factory</a><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="wholesale.html">Wholesale</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="wholesale.html#inquiry">Contact</a></nav>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" hidden><a href="factory.html">Factory</a><a href="oem-magnetic-tiles.html">OEM / ODM</a><a href="wholesale.html">Wholesale</a><a href="play-system.html">Play Systems</a><a href="products/selection.html">Products</a><a href="quality-certification.html">Quality &amp; Reports</a><a href="buyer-resources.html">Buyer resources</a><a href="wholesale.html#inquiry">Contact</a></nav>
 </header>
 <main class="buyer-main" id="buyer-main">
 <section class="buyer-hero">
@@ -319,12 +342,7 @@
 <h3>Custom &amp; private label</h3>
 <p>Review logos, packaging, colors, set configuration and selected existing accessory combinations. Custom / private-label orders start at 500 sets per SKU.</p>
 <a class="buyer-link" href="oem-magnetic-tiles.html">OEM scope, samples &amp; process →</a>
-<h3>Planning your own range?</h3>
-<ul>
-<li><a class="buyer-link" href="magnetic-tiles-brand-positioning.html">How brands position magnetic tiles: price or differentiation →</a></li>
-<li><a class="buyer-link" href="custom-magnetic-tile-set-configuration.html">Plan your set mix, piece count and carton →</a></li>
-<li><a class="buyer-link" href="private-label-magnetic-tiles-development.html">Private label: from brief to approved sample →</a></li>
-</ul>
+
 </div>
 <aside class="buyer-panel">
 <h2>Build your buying brief</h2>
@@ -332,24 +350,24 @@
 <li>Choose the SKU and quantity per color.</li>
 <li>Share your market, channel and destination.</li>
 <li>Confirm stock or private label, packaging and artwork.</li>
-<li>Request samples, specifications and applicable reports.</li>
+<li>Review samples, specifications and project documentation.</li>
 </ol>
 <p>Share your selected product and destination with your request.</p>
 <a class="buyer-link" href="quality-certification.html">Quality &amp; test reports →</a>
 </aside>
 </div>
 </section>
-<section class="buyer-section buyer-tint">
+<section id="faq" class="buyer-section buyer-tint">
 <div class="buyer-wrap buyer-reading">
 <h2>Wholesale sourcing FAQ</h2>
 <div class="buyer-faq">
-<details>
-<summary>Can I order DUDUBAO stock or private label?</summary>
-<p>For DUDUBAO-branded stock, small orders are supported subject to actual inventory. Custom and private-label orders start at 500 sets per SKU. </p>
+<details id="faq-f039">
+<summary>Can I order small quantities of DUDUBAO-branded stock?</summary>
+<p>For DUDUBAO-branded stock, we will check inventory and order feasibility for your proposed assortment. Please share the selected SKUs and quantities per SKU.</p>
 </details>
-<details>
-<summary>Can I mix colors or SKUs?</summary>
-<p>List quantity per SKU and colorway. Mixed-SKU requests are reviewed separately; 500 sets in total does not automatically qualify for mixed-SKU production.</p>
+<details id="faq-f038">
+<summary>Can quantities from different SKUs be combined to meet the MOQ?</summary>
+<p>For custom and private-label magnetic tile orders, the minimum is 500 sets per SKU. This applies separately to each SKU. Quantities from different SKUs cannot be combined to meet the minimum.</p>
 </details>
 <details>
 <summary>What do you need for a wholesale quotation?</summary>
@@ -363,7 +381,20 @@
 <summary>How do I check safety documentation?</summary>
 <p>Start with the exact stock SKU and configuration you plan to order. Use the <a href="magnetic-tiles-safety-testing-guide.html">safety testing guide</a> to compare the sample identity, component list and destination requirements before relying on a document. Documents are matched to SKU and destination per project.</p>
 </details>
+<details id="faq-f073">
+<summary>What retail-box dimensions are recorded for the five main sets?</summary>
+<p>Recorded retail-box dimensions are D01-C: 322 × 240 × 73 mm; D10-C: 510 × 330 × 100 mm; A01-T: 484 × 410 × 105 mm; A03-T: 370 × 330 × 90 mm; C01-C: 320 × 270 × 74 mm. These are reference values, not current-batch measurements. Confirm the sample and corresponding packaging.</p>
+</details>
+<details id="faq-f078">
+<summary>What single-box weights are recorded for the five main sets?</summary>
+<p>Recorded single-box weights are D01-C: 3.25 kg; D10-C: 8 kg; A01-T: 3.25 kg; A03-T: 1.89 kg; C01-C: 2.2 kg. These are box-weight references, not single-set net weights or current-batch measurements. Confirm the sample and corresponding packaging.</p>
+</details>
+<details id="faq-f080">
+<summary>Are the packing references a packing list for our current shipment?</summary>
+<p>Packing data are reference values from product records, not measurements of the current batch. Confirm the sample, corresponding packaging and final packing details for your order.</p>
+</details>
 </div>
+<p><a class="buyer-link" href="faq.html">View all buyer questions</a></p>
 </div>
 </section>
 <section class="buyer-close">
@@ -493,6 +524,39 @@
           </form></div>
   </div>
 </section>
+<section class="next-reading" id="next-reading" aria-labelledby="next-reading-title" data-buying-stage="selection">
+  <div class="next-reading-wrap">
+    <p class="next-reading-stage">Current stage: Selection</p>
+    <h2 class="next-reading-title" id="next-reading-title">What to read next</h2>
+    <p class="next-reading-intro">Choose each set’s role in the assortment, then plan the sample purpose and colour-box brief.</p>
+    <ul class="next-reading-grid">
+      <li class="next-reading-item">
+        <a class="next-reading-card" href="wholesale-magnetic-tiles-retailer-guide.html#assortment" data-next-stage="selection">
+          <span class="next-reading-card-stage">Selection</span>
+          <h3 class="next-reading-card-title">Plan the first retail assortment</h3>
+          <p class="next-reading-card-description">Compare set roles and contents before writing the first assortment brief.</p>
+          <span class="next-reading-action">Read guide <span aria-hidden="true">→</span></span>
+        </a>
+      </li>
+      <li class="next-reading-item">
+        <a class="next-reading-card" href="moq-samples-guide.html#sample-purpose" data-next-stage="samples">
+          <span class="next-reading-card-stage">Samples</span>
+          <h3 class="next-reading-card-title">Choose the sample purpose</h3>
+          <p class="next-reading-card-description">Define what the stock or custom sample needs to resolve before the review begins.</p>
+          <span class="next-reading-action">Read guide <span aria-hidden="true">→</span></span>
+        </a>
+      </li>
+      <li class="next-reading-item">
+        <a class="next-reading-card" href="packaging-artwork-guide.html" data-next-stage="packaging">
+          <span class="next-reading-card-stage">Packaging</span>
+          <h3 class="next-reading-card-title">Prepare the box and artwork</h3>
+          <p class="next-reading-card-description">Work through the product reference, brand files, dieline and artwork review.</p>
+          <span class="next-reading-action">Read guide <span aria-hidden="true">→</span></span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</section>
 </main>
 <footer class="buyer-footer">
 <div class="buyer-wrap">
@@ -505,6 +569,7 @@
 <a href="oem-magnetic-tiles.html">OEM &amp; private label</a>
 <a href="oem-magnetic-tiles-europe.html">European &amp; UK private label projects</a>
 <a href="quality-certification.html">Quality &amp; reports</a>
+<a href="buyer-resources.html">Buyer resources</a>
 <a href="faq.html">FAQ</a>
 <a href="privacy.html">Privacy</a>
 <a href="mailto:ryan@dudubao.net">ryan@dudubao.net</a>

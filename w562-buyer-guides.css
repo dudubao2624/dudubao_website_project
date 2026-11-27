@@ -1,0 +1,35 @@
+.w562-guide-page .guide-reading{max-width:860px}
+.w562-guide-page h1{max-width:860px}
+.w562-guide-page .w562-date{font-size:14px;color:#526579;margin-top:22px}
+.w562-toc{display:flex;flex-wrap:wrap;gap:10px 22px;padding-top:22px;padding-bottom:24px;border-top:1px solid #dce4ea}
+.w562-toc strong{width:100%;font-size:16px}
+.w562-toc a{font-size:15px;color:#175991;text-decoration:underline;text-underline-offset:4px;line-height:1.6}
+.w562-copy a{color:#175991;text-decoration:underline;text-underline-offset:3px}
+.w562-guide-page .w562-copy>h2{font-size:clamp(26px,3vw,34px);scroll-margin-top:110px}
+.w562-guide-page .w562-copy>h2:not(:first-child){padding-top:12px}
+.w562-guide-page .buyer-label{font-size:14px!important}
+.w562-guide-page .buyer-table{min-width:600px;font-size:16px}
+.w562-guide-page .buyer-table th:first-child{width:21%}
+.w562-guide-page .buyer-table th:last-child{width:26%}
+.w562-guide-page .buyer-table caption{font-size:14px}
+.w562-guide-page .guide-table-scroll:focus-visible{outline:3px solid #28629d;outline-offset:4px}
+.w562-checklist{padding-left:24px}
+.w562-checklist li{padding-left:4px}
+.w562-inquiry{scroll-margin-top:110px}
+.w562-inquiry .button{display:inline-flex;align-items:center;justify-content:center}
+.w562-guide-page .buyer-faq summary:focus-visible{outline:3px solid #28629d;outline-offset:5px}
+@media(max-width:760px){
+  .w562-guide-page h1{font-size:34px;overflow-wrap:break-word}
+  .w562-toc{gap:12px 20px;padding-top:18px;padding-bottom:22px}
+  .w562-guide-page .w562-copy>h2{font-size:27px;scroll-margin-top:90px}
+  .w562-inquiry{scroll-margin-top:90px}
+}
+@media print{
+  .w562-guide-page .site-header,.w562-guide-page .buyer-footer,.w562-guide-page .mobile-contact-bar,.w562-guide-page .buyer-actions,.w562-toc,.w562-inquiry{display:none}
+  .w562-guide-page .buyer-wrap{width:100%;max-width:none}
+  .w562-guide-page .buyer-section,.w562-guide-page .buyer-hero{padding:20px 0}
+  .w562-guide-page .buyer-tint{background:#fff}
+  .w562-guide-page .guide-table-scroll{overflow:visible}
+  .w562-guide-page .buyer-table{min-width:0}
+  .w562-guide-page h2,.w562-guide-page tr{break-inside:avoid}
+}
