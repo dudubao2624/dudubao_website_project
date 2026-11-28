@@ -107,7 +107,7 @@
   .brand-lede { font-size:14px; line-height:1.65; }
   .brand-actions { gap:10px; margin-top:22px; }
   .brand-hero .brand-actions { display:grid; grid-template-columns:1fr 1fr; }
-  .brand-hero .button { font-size:12px; padding:12px 9px; min-width:0; }
+  .brand-hero .button { font-size:14px; padding:12px 9px; min-width:0; }
   .brand-hero-note { margin-top:12px; font-size:11px; }
   .brand-hero-visual figcaption { padding:13px 16px; }
   .brand-hero-visual figcaption strong { font-size:13px; }

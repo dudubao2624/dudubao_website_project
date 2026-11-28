@@ -1,0 +1,53 @@
+/* Local refinements for A01-C, C02-C and B07-C; shared guide styles stay unchanged. */
+.w586-product .buyer-main { padding-top: 0; }
+.w586-product .buyer-hero-grid { gap: 36px; align-items: center; }
+.w586-product .buyer-hero-grid h1 { font-size: clamp(32px, 3vw, 42px); }
+.w586-product .buyer-lede { margin-bottom: 14px; }
+.w586-product .w567-key-facts { grid-template-columns: .85fr .8fr 1.35fr; gap: 18px; }
+.w586-product .w586-box-fact strong { font-size: 20px; line-height: 1.4; }
+.w586-product .w586-box-fact strong span { display: inline; font-size: 14px; color: inherit; }
+.w586-product .w586-hero-material { margin: 12px 0 0; font-size: 14px; line-height: 1.65; color: #42566c; }
+.w586-product .buyer-actions { margin-top: 18px; }
+.w586-product .buyer-product-visual { width: min(100%, 440px); box-sizing: border-box; }
+.w586-product .buyer-product-visual img { aspect-ratio: 1; max-height: 340px; }
+.w586-product .buyer-product-visual figcaption { font-size: 14px; }
+.w586-product .w567-buying-strip { margin-top: 22px; gap: 24px; padding: 18px 0; }
+.w586-product .w567-buying-strip > div + div { padding-left: 24px; }
+.w586-product .w567-buying-strip strong { font-size: 19px; }
+.w586-product .w567-page-nav { gap: 4px 24px; padding: 10px 0; }
+.w586-product .w567-components caption { padding-bottom: 14px; }
+.w586-product .w567-components caption span { margin-top: 4px; }
+.w586-product .w567-components :is(th, td) { overflow-wrap: normal; }
+.w586-product .w567-components td { font-variant-numeric: tabular-nums; }
+.w586-product .w586-use-note { margin: 24px 0 0; }
+.w586-product .w586-packing-note { margin-top: 14px; }
+.w586-product .w586-planning-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; margin-top: 28px; }
+.w586-product .w586-planning-grid article { border-top: 2px solid #829db5; padding-top: 10px; }
+.w586-product .w586-planning-grid h3 { font-size: 20px; }
+.w586-product .w586-planning-grid p { margin-bottom: 0; }
+.w586-product .w586-guide-links { display: flex; flex-wrap: wrap; gap: 8px 26px; margin-top: 24px; }
+.w586-product .w586-guide-links a { display: inline-flex; align-items: center; min-height: 44px; }
+.w586-product .buyer-close .buyer-label { margin-bottom: 8px; }
+.w586-product .buyer-close .buyer-actions { min-width: 230px; }
+@media (min-width: 761px) and (max-width: 1000px) {
+  .w586-product .buyer-hero-grid { gap: 24px; }
+  .w586-product .w567-key-facts { gap: 12px; }
+  .w586-product .buyer-actions { flex-direction: row; }
+  .w586-product .buyer-actions .button { flex: 1; padding-inline: 12px; }
+  .w586-product .w586-box-fact strong { font-size: 18px; }
+}
+@media (max-width: 760px) {
+  .w586-product .buyer-main { padding-top: 0; }
+  .w586-product .buyer-hero-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .w586-product .buyer-hero-grid h1 { font-size: 32px; }
+  .w586-product .w567-key-facts { gap: 12px; }
+  .w586-product .w586-box-fact strong { font-size: 17px; }
+  .w586-product .buyer-product-visual { width: 100%; }
+  .w586-product .buyer-product-visual img { max-height: none; }
+  .w586-product .w567-buying-strip { gap: 16px; }
+  .w586-product .w567-buying-strip > div + div { padding-left: 0; }
+  .w586-product .w567-buying-strip > div { grid-template-columns: 110px minmax(0, 1fr); gap: 14px; }
+  .w586-product .w567-buying-strip strong { font-size: 18px; }
+  .w586-product .w586-planning-grid { grid-template-columns: minmax(0, 1fr); gap: 22px; }
+  .w586-product .buyer-close .buyer-actions { min-width: 0; margin-top: 24px; }
+}

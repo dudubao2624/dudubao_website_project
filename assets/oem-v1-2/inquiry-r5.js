@@ -67,11 +67,19 @@ const analyticsEventNames = new Set([
   "email_click",
   "phone_click",
   "catalog_download",
+  "file_download",
   "product_detail_click",
   "product_inquiry_click",
 ]);
 const analyticsProductFamilies = new Set(["music_magnetic_systems", "magnetic_tiles"]);
 const analyticsSourceSections = new Set(["featured_innovations", "product_system"]);
+const analyticsInquiryTypes = new Set([
+  "stock", "custom", "samples", "packaging", "documentation", "other",
+]);
+const analyticsSpecSheetSkus = new Set([
+  "D01-C", "D10-C", "A01-T", "A03-T", "C01-C",
+  "D15-C", "M01-C", "M02-C", "A01-C", "C02-C", "B07-C",
+]);
 const analyticsState = {
   googleInitialized: false,
   clarityInitialized: false,
@@ -227,7 +235,7 @@ const inquiryReloadDraftKey = "dudubao_inquiry_reload_draft_v1";
 const inquiryDraftFields = [
   "name", "company", "email", "phone", "country", "business-type",
   "product-interest", "estimated-quantity", "message",
-  "target-market", "packaging-private-label", "customization",
+  "target-market", "packaging-private-label", "customization", "inquiry_type",
 ];
 const inquiryDraftLifetimeMs = 60000;
 const inquiryDraftMaxLength = 65536;
@@ -328,6 +336,19 @@ const sanitizeAnalyticsParameters = (eventName, parameters) => {
     const { product_family: productFamily } = parameters;
     return analyticsProductFamilies.has(productFamily)
       ? { product_family: productFamily }
+      : null;
+  }
+
+  if (eventName === "form_submit_success") {
+    return {
+      inquiry_type: analyticsInquiryTypes.has(parameters.inquiry_type)
+        ? parameters.inquiry_type : "unspecified",
+    };
+  }
+
+  if (eventName === "file_download") {
+    return analyticsSpecSheetSkus.has(parameters.sku)
+      ? { sku: parameters.sku, file_name: `${parameters.sku}-buyer-sheet.pdf`, file_extension: "pdf" }
       : null;
   }
 
@@ -448,6 +469,18 @@ const setupAnalyticsConsent = () => {
   }
 };
 
+// Only a listed purpose can override the native, optional page default.
+const inquiryTypeSelect = form?.querySelector('select[name="inquiry_type"]');
+const preselectInquiryType = (params = new URLSearchParams(window.location.search)) => {
+  const value = params.get("inquiry_type");
+  if (!value || !inquiryTypeSelect ||
+      !Array.from(inquiryTypeSelect.options).some((option) => option.value === value)) {
+    return false;
+  }
+  inquiryTypeSelect.value = value;
+  return true;
+};
+
 const preselectProductInterest = () => {
   if (!productInterestSelect) {
     return;
@@ -468,6 +501,7 @@ const preselectProductInterest = () => {
 };
 
 preselectProductInterest();
+preselectInquiryType();
 // Restore after URL preselection, before any analytics library can initialize.
 restoreInquiryAfterConsentReload();
 setupAnalyticsConsent();
@@ -490,6 +524,27 @@ document.addEventListener("click", (event) => {
     trackAnalyticsEvent("product_inquiry_click", {
       product_family: contactLink.dataset.productFamily,
     });
+  }
+
+  const inquiryUrl = new URL(contactLink.href);
+  if (!event.defaultPrevented && event.button === 0 &&
+      !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey &&
+      !contactLink.hasAttribute("download") &&
+      (!contactLink.target || contactLink.target === "_self") &&
+      inquiryUrl.origin === window.location.origin &&
+      inquiryUrl.pathname === window.location.pathname &&
+      ["#inquiry", "#contact", "#project-brief", "#contact-form"].includes(inquiryUrl.hash) &&
+      preselectInquiryType(inquiryUrl.searchParams)) {
+    event.preventDefault();
+    window.history.replaceState(null, "", inquiryUrl.href);
+    document.getElementById(inquiryUrl.hash.slice(1))?.scrollIntoView({ behavior: "smooth" });
+  }
+
+  // Match only this site's specification PDFs; derive identifiers without visitor data.
+  const specSheetMatch = inquiryUrl.origin === window.location.origin &&
+    /^\/assets\/sheets\/([A-Z]\d{2}-[A-Z])-buyer-sheet\.pdf$/.exec(inquiryUrl.pathname);
+  if (specSheetMatch) {
+    trackAnalyticsEvent("file_download", { sku: specSheetMatch[1] });
   }
 
   const href = (contactLink.getAttribute("href") || "").trim();
@@ -700,6 +755,7 @@ if (form && statusMessage) {
     }
 
     const formData = new FormData(form);
+    const inquiryTypeAtSubmit = formData.get("inquiry_type");
     const submitButton = form.querySelector('button[type="submit"]');
     const submitButtonMarkup = submitButton?.innerHTML;
     const controller = new AbortController();
@@ -804,7 +860,7 @@ if (form && statusMessage) {
     if (serviceAccepted) {
       // Optional analytics and UI errors must not reclassify a confirmed acceptance.
       try {
-        trackAnalyticsEvent("form_submit_success");
+        trackAnalyticsEvent("form_submit_success", { inquiry_type: inquiryTypeAtSubmit });
       } catch {
         console.warn("DUDUBAO optional analytics unavailable");
       }

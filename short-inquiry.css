@@ -1,4 +1,4 @@
-/* Shared layout for the five-field inquiry and native optional disclosure. */
+/* Shared layout for the six-field inquiry and native optional disclosure. */
 .contact-form[data-short-inquiry] {
   min-width: 0;
 }
@@ -19,6 +19,7 @@
   font-size: 0.92rem;
   font-weight: 800;
 }
+.short-inquiry-main > .inquiry-type-field,
 .short-inquiry-main > label:last-child,
 .short-inquiry-extra > fieldset,
 .short-inquiry-extra > .oem-full {
