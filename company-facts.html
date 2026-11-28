@@ -266,10 +266,10 @@
 <section class="buyer-section buyer-tint" id="inquiry"><div class="buyer-wrap facts-reading">
 <h2>How to inquire</h2>
 <ul class="facts-list">
-<li id="inquiry-route">The <a href="oem-magnetic-tiles.html#inquiry">OEM project inquiry section</a> is the website route for discussing a DUDUBAO sourcing project.</li>
+<li id="inquiry-route">The <a href="oem-magnetic-tiles.html?inquiry_type=custom#inquiry">OEM project inquiry section</a> is the website route for discussing a DUDUBAO sourcing project.</li>
 <li id="inquiry-brief">An inquiry brief should identify the selected model, target market, estimated quantity and packaging or customization needs.</li>
 </ul>
-<div class="buyer-actions"><a class="button primary" href="oem-magnetic-tiles.html#inquiry">Prepare your project inquiry</a><a class="button secondary" href="wholesale.html">Explore wholesale sourcing</a></div>
+<div class="buyer-actions"><a class="button primary" href="oem-magnetic-tiles.html?inquiry_type=custom#inquiry">Prepare your project inquiry</a><a class="button secondary" href="wholesale.html">Explore wholesale sourcing</a></div>
 </div></section>
 </article>
 </main>
@@ -294,22 +294,10 @@
 <small>© 2026 DUDUBAO. All rights reserved.</small>
 </div>
 </footer>
-<script>
-// Mobile navigation.
-const toggle = document.querySelector('.mobile-menu-toggle');
-const menu = document.getElementById('mobile-menu');
-if (toggle && menu) {
-  toggle.addEventListener('click', () => {
-    const expanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!expanded));
-    toggle.setAttribute('aria-label', expanded ? 'Open navigation menu' : 'Close navigation menu');
-    menu.hidden = expanded;
-  });
-}
-</script>
+<script src="script.js?v=w583-20261127-1" defer></script>
 <nav class="mobile-contact-bar" aria-label="Contact options">
   <a class="mobile-contact-whatsapp" href="https://wa.me/8619357221813" target="_blank" rel="noopener">WhatsApp</a>
-  <a class="mobile-contact-inquiry" href="wholesale.html#inquiry">Send inquiry</a>
+  <a class="mobile-contact-inquiry" href="wholesale.html?inquiry_type=stock#inquiry">Send inquiry</a>
 </nav>
 </body>
 </html>
